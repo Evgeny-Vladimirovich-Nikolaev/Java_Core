@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,10 +10,10 @@ public class EmployeesList {
     private ArrayList<String> firstNames = new ArrayList<>();
     private ArrayList<String> patronymics = new ArrayList<>();
 
-    ArrayList<Employee> create(){
+     public ArrayList<Employee> create(){
         ArrayList<Employee> list = new ArrayList<>(1000);
         fillArrays();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < 101; i++) {
             list.add(createRecord());
         }
         return list;

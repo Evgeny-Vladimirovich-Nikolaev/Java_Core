@@ -51,12 +51,10 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "ID=" + ID +
-                ", lastName='" + lastName + '\'' +
-                ", FIRST_NAME='" + FIRST_NAME + '\'' +
-                ", PATRONYMIC='" + PATRONYMIC + '\'' +
-                ", HIRE_DATE=" + HIRE_DATE +
-                '}';
+        return  "\nТабельный номер: " + ID +
+                "\nФамилия: " + lastName +
+                "\nИмя: " + FIRST_NAME +
+                "\nОтчество: " + PATRONYMIC +
+                "\nДата приема на работу: " + HIRE_DATE;
     }
 }
