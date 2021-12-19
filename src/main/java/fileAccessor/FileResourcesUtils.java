@@ -36,7 +36,15 @@ public class FileResourcesUtils {
                 names.add(line);
             }
         } catch (IOException e) {
+            System.out.println("Не удалось прочитать файл ресурсов");
             e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                System.out.println("Ошибка ввода/вывода: не удалось закрыть поток");
+                e.printStackTrace();
+            }
         }
     }
 }
