@@ -11,7 +11,8 @@ public class PeriodCounter {
     public PeriodCounter() {
         try{this.hireDate = LocalDate.parse("1995-01-1", DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (DateTimeParseException e) {
-            System.out.println(e);
+            System.out.println
+                    ("Не удалось получить данные о стаже: данные отсутствуют или содержат неправильные формат");
         }
         this.currentDate = LocalDate.now();
     }
