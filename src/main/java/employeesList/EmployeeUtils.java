@@ -51,7 +51,7 @@ public class EmployeeUtils {
     }
 
     void deleteByOddIndex() {
-        ListIterator<Employee> listIterator = employees.listIterator(employees.size() - 1);
+        ListIterator<Employee> listIterator = employees.listIterator(employees.size());
         while(listIterator.hasPrevious()) {
             int index = listIterator.previousIndex();
             listIterator.previous();
