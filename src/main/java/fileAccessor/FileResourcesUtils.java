@@ -9,11 +9,10 @@ public class FileResourcesUtils {
 
     public FileResourcesUtils(String fileName, ArrayList<String> names) {
         this.names = names;
-        InputStream is = this.getFileFromResourceAsStream(fileName);
-        fillNamesList(is);
+        InputStream inputStream = this.getFileFromResourceAsStream(fileName);
+        fillNamesList(inputStream);
     }
 
-    // get a file from the resources folder
     private InputStream getFileFromResourceAsStream(String fileName) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
