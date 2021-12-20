@@ -20,7 +20,7 @@ public class Contact {
         this.PATRONYMIC = patronymic;
         this.mobileOperator = mobileOperator;
         this.PHONE_NUMBER = phoneNumber;
-        contacts = new ArrayList<Contact>();
+        contacts = new ArrayList<>();
     }
 
     public String getLAST_NAME() {
