@@ -11,9 +11,9 @@ public class EmployeesList {
     private ArrayList<String> patronymics = new ArrayList<>();
 
      public ArrayList<Employee> create(){
-        ArrayList<Employee> list = new ArrayList<>(1000);
+        ArrayList<Employee> list = new ArrayList<>(100);
         fillArrays();
-        for(int i = 0; i < 101; i++) {
+        for(int i = 0; i < 100; i++) {
             list.add(createRecord());
         }
         return list;

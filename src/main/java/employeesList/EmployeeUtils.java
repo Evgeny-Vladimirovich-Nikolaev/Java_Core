@@ -26,7 +26,7 @@ public class EmployeeUtils {
         System.out.printf("\nCПИСОК СОТРУДНИКОВ СО СТАЖЕМ %s ЛЕТ:\n", workAge);
         while (iterator.hasNext()) {
             Employee employee = iterator.next();
-            if (getYears(employee) == workAge) {
+            if (countYears(employee) == workAge) {
                 format(employee);
             }
         }
@@ -43,8 +43,8 @@ public class EmployeeUtils {
         System.out.printf("\nCПИСОК СОТРУДНИКОВ СО СТАЖЕМ %s%s ЛЕТ:\n", gr, workAge);
         while (iterator.hasNext()) {
             Employee employee = iterator.next();
-            if (greater && getYears(employee) > workAge
-                || !greater && getYears(employee) < workAge) {
+            if (greater && countYears(employee) > workAge
+                || !greater && countYears(employee) < workAge) {
                 format(employee);
             }
         }
@@ -55,7 +55,7 @@ public class EmployeeUtils {
         while(listIterator.hasPrevious()) {
             int index = listIterator.previousIndex();
             listIterator.previous();
-            if(index % 2 == 0) {
+            if(index % 2 != 0) {
                 listIterator.remove();
             }
         }
@@ -65,11 +65,11 @@ public class EmployeeUtils {
         System.out.println(
             employee
              + "\nСтаж работы: "
-             + getYears(employee)
+             + countYears(employee)
              + " лет");
     }
 
-    private int getYears(Employee employee) {
+    private int countYears(Employee employee) {
         return Period.between(employee.getHIRE_DATE(), LocalDate.now()).getYears();
     }
 
