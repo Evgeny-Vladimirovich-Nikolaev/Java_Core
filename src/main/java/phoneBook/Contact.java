@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 public class Contact {
 
-    private final String LAST_NAME;
-    private final String FIRST_NAME;
-    private final String PATRONYMIC;
-    private final Long PHONE_NUMBER;
+    private final String lastName;
+    private final String firstName;
+    private final String patronymic;
+    private final Long phoneNumber;
     private final String typePhone;
     private String operator;
     private List<Contact> contacts;
@@ -19,10 +19,10 @@ public class Contact {
                    long phoneNumber,
                    String typePhone,
                    String operator) {
-        this.LAST_NAME = lastName;
-        this.FIRST_NAME = firstName;
-        this.PATRONYMIC = patronymic;
-        this.PHONE_NUMBER = phoneNumber;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.phoneNumber = phoneNumber;
         this.typePhone = typePhone;
         this.operator = operator;
         contacts = new ArrayList<>();
@@ -34,10 +34,10 @@ public class Contact {
                    String phoneNumber,
                    String typePhone,
                    String operator) {
-        this.LAST_NAME = lastName;
-        this.FIRST_NAME = firstName;
-        this.PATRONYMIC = patronymic;
-        this.PHONE_NUMBER = parseNumber(phoneNumber);
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.phoneNumber = parseNumber(phoneNumber);
         this.typePhone = typePhone;
         this.operator = operator;
         contacts = new ArrayList<>();
@@ -48,10 +48,10 @@ public class Contact {
                    String patronymic,
                    long phoneNumber,
                    String typePhone) {
-        this.LAST_NAME = lastName;
-        this.FIRST_NAME = firstName;
-        this.PATRONYMIC = patronymic;
-        this.PHONE_NUMBER = phoneNumber;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.phoneNumber = phoneNumber;
         this.typePhone = typePhone;
         contacts = new ArrayList<>();
     }
@@ -61,24 +61,24 @@ public class Contact {
                    String patronymic,
                    String phoneNumber,
                    String typePhone) {
-        this.LAST_NAME = lastName;
-        this.FIRST_NAME = firstName;
-        this.PATRONYMIC = patronymic;
-        this.PHONE_NUMBER = parseNumber(phoneNumber);
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.phoneNumber = parseNumber(phoneNumber);
         this.typePhone = typePhone;
         contacts = new ArrayList<>();
     }
 
-    public String getLAST_NAME() {
-        return LAST_NAME;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getFIRST_NAME() {
-        return FIRST_NAME;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getPATRONYMIC() {
-        return PATRONYMIC;
+    public String getPatronymic() {
+        return patronymic;
     }
 
     public String getMobileOperator() {
@@ -89,8 +89,12 @@ public class Contact {
         this.operator = mobileOperator;
     }
 
-    public long getPHONE_NUMBER() {
-        return PHONE_NUMBER;
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getTypePhone() {
+        return typePhone;
     }
 
     public List<Contact> getContacts() {

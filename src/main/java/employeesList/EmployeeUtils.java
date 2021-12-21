@@ -12,27 +12,27 @@ public class EmployeeUtils {
         this.employees = employees;
     }
 
-    void getAll() {
+    void printAll() {
         Iterator<Employee> iterator = employees.iterator();
         System.out.println("\nОБЩИЙ СПИСОК СОТРУДНИКОВ:");
         while (iterator.hasNext()) {
             Employee employee = iterator.next();
-            format(employee);
+            printFormatted(employee);
         }
     }
 
-    void getWithWorkAge(int workAge) {
+    void printWithWorkAge(int workAge) {
         Iterator<Employee> iterator = employees.iterator();
         System.out.printf("\nCПИСОК СОТРУДНИКОВ СО СТАЖЕМ %s ЛЕТ:\n", workAge);
         while (iterator.hasNext()) {
             Employee employee = iterator.next();
             if (countYears(employee) == workAge) {
-                format(employee);
+                printFormatted(employee);
             }
         }
     }
 
-    void getWithWorkAge(int workAge, boolean greater) {
+    void printWithWorkAge(int workAge, boolean greater) {
         String gr;
         Iterator<Employee> iterator = employees.iterator();
         if(greater) {
@@ -45,7 +45,7 @@ public class EmployeeUtils {
             Employee employee = iterator.next();
             if (greater && countYears(employee) > workAge
                 || !greater && countYears(employee) < workAge) {
-                format(employee);
+                printFormatted(employee);
             }
         }
     }
@@ -61,7 +61,7 @@ public class EmployeeUtils {
         }
     }
 
-    private void format(Employee employee) {
+    private void printFormatted(Employee employee) {
         System.out.println(
             employee
              + "\nСтаж работы: "
@@ -70,7 +70,7 @@ public class EmployeeUtils {
     }
 
     private int countYears(Employee employee) {
-        return Period.between(employee.getHIRE_DATE(), LocalDate.now()).getYears();
+        return Period.between(employee.getHireDate(), LocalDate.now()).getYears();
     }
 
 }

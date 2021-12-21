@@ -2,22 +2,22 @@ import java.time.LocalDate;
 
 public class Employee {
 
-    private final int ID;
+    private final int id;
     private String lastName;
-    private final String FIRST_NAME;
-    private final String PATRONYMIC;
-    private final LocalDate HIRE_DATE;
+    private final String firstName;
+    private final String patronymic;
+    private final LocalDate hireDate;
 
     public Employee(int id, String lastName, String firstName, String patronymic, LocalDate hireDate) {
-        this.ID = id;
+        this.id = id;
         this.lastName = lastName;
-        this.FIRST_NAME = firstName;
-        this.PATRONYMIC = patronymic;
-        this.HIRE_DATE = hireDate;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.hireDate = hireDate;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getLastName() {
@@ -28,33 +28,33 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getFIRST_NAME() {
-        return FIRST_NAME;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getPATRONYMIC() {
-        return PATRONYMIC;
+    public String getPatronymic() {
+        return patronymic;
     }
 
     public String getFIO() {
         StringBuilder sb = new StringBuilder(lastName);
         sb.append(" ");
-        sb.append(FIRST_NAME);
+        sb.append(firstName);
         sb.append(" ");
-        sb.append(PATRONYMIC);
+        sb.append(patronymic);
         return sb.toString();
     }
 
-    public LocalDate getHIRE_DATE() {
-        return HIRE_DATE;
+    public LocalDate getHireDate() {
+        return hireDate;
     }
 
     @Override
     public String toString() {
-        return  "\nТабельный номер: " + ID +
+        return  "\nТабельный номер: " + id +
                 "\nФамилия: " + lastName +
-                "\nИмя: " + FIRST_NAME +
-                "\nОтчество: " + PATRONYMIC +
-                "\nДата приема на работу: " + HIRE_DATE;
+                "\nИмя: " + firstName +
+                "\nОтчество: " + patronymic +
+                "\nДата приема на работу: " + hireDate;
     }
 }

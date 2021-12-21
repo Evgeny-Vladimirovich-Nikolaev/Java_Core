@@ -34,13 +34,13 @@ public class FileResourcesUtils {
             while ((line = reader.readLine()) != null) {
                 names.add(line);
             }
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             System.out.println("Не удалось прочитать файл ресурсов");
             e.printStackTrace();
         } finally {
             try {
                 is.close();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 System.out.println("Ошибка ввода/вывода: не удалось закрыть поток");
                 e.printStackTrace();
             }

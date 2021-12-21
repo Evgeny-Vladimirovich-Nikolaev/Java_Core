@@ -2,13 +2,13 @@ public class EmployeesRunner {
 
     public static void main(String[] args) {
         EmployeeUtils employees = new EmployeeUtils(new EmployeesList().create());
-        employees.getAll();
-        employees.getWithWorkAge(10);
-        employees.getWithWorkAge(20);
-        employees.getWithWorkAge(35, true);
-        employees.getWithWorkAge(3, false);
+        employees.printAll();
+        employees.printWithWorkAge(10);
+        employees.printWithWorkAge(20);
+        employees.printWithWorkAge(35, true);
+        employees.printWithWorkAge(3, false);
         employees.deleteByOddIndex();
-        employees.getAll();
+        employees.printAll();
     }
 
 }
