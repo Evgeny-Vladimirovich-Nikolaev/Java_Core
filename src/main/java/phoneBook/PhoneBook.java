@@ -17,6 +17,9 @@ public class PhoneBook {
         s = s.replace(", ", "\n");
         System.out.println(s);
         new ContactBuilder();
+
+        SubscriberName subscriberName = new SubscriberName();
+
  }
 
 }
