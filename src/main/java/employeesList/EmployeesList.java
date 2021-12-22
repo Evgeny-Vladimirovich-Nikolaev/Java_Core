@@ -20,9 +20,9 @@ public class EmployeesList {
     }
 
     private void fillArrays() {
-        new FileResourcesUtils("resources/lastNames.txt", lastNames);
-        new FileResourcesUtils("resources/firstNames.txt", firstNames);
-        new FileResourcesUtils("resources/patronymics.txt", patronymics);
+        lastNames = ResourcesReader.readLines("resources/maleLastNames.txt");
+        firstNames = ResourcesReader.readLines("resources/maleFirstNames.txt");
+        patronymics = ResourcesReader.readLines("resources/malePatronymics.txt");
     }
 
     private Employee createRecord() {

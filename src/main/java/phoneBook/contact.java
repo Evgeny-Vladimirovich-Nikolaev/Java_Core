@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Contact {
+public class contact {
 
     private final String lastName;
     private final String firstName;
@@ -11,9 +11,9 @@ public class Contact {
     private final Long phoneNumber;
     private final String typePhone;
     private String operator;
-    private List<Contact> contacts;
+    private List<contact> contacts;
 
-    public Contact(String lastName,
+    public contact(String lastName,
                    String firstName,
                    String patronymic,
                    long phoneNumber,
@@ -28,7 +28,7 @@ public class Contact {
         contacts = new ArrayList<>();
     }
 
-    public Contact(String lastName,
+    public contact(String lastName,
                    String firstName,
                    String patronymic,
                    String phoneNumber,
@@ -43,7 +43,7 @@ public class Contact {
         contacts = new ArrayList<>();
     }
 
-    public Contact(String lastName,
+    public contact(String lastName,
                    String firstName,
                    String patronymic,
                    long phoneNumber,
@@ -56,7 +56,7 @@ public class Contact {
         contacts = new ArrayList<>();
     }
 
-    public Contact(String lastName,
+    public contact(String lastName,
                    String firstName,
                    String patronymic,
                    String phoneNumber,
@@ -97,11 +97,11 @@ public class Contact {
         return typePhone;
     }
 
-    public List<Contact> getContacts() {
+    public List<contact> getContacts() {
         return contacts;
     }
 
-    public void setContact(Contact contact) {
+    public void setContact(contact contact) {
         contacts.add(contact);
     }
 

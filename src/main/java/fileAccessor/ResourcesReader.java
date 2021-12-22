@@ -1,22 +1,16 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 
-public class FileResourcesUtils {
+public class ResourcesReader implements Closeable {
 
-    private List<String> names;
-
-    public FileResourcesUtils(String fileName, ArrayList<String> names) {
-        this.names = names;
-        InputStream inputStream = this.getFileFromResourceAsStream(fileName);
-        fillNamesList(inputStream);
+    private ResourcesReader() {
     }
 
-    private InputStream getFileFromResourceAsStream(String fileName) {
+    private static InputStream getFileFromResourceAsStream(String fileName) {
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            InputStream inputStream = classLoader.getResourceAsStream(fileName);
+            Class cls = ResourcesReader.class;
+            InputStream inputStream = cls.getResourceAsStream(fileName);
             if (inputStream == null) {
                 throw new FileNotFoundException("Файл " + fileName + " не найден");
             } else {
@@ -27,23 +21,32 @@ public class FileResourcesUtils {
         }
     }
 
-    private void fillNamesList(InputStream is) {
-        try (InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
-            BufferedReader reader = new BufferedReader(streamReader)) {
+    public static ArrayList<String> readLines(String fileName) {
+        ArrayList<String> lines = new ArrayList<>();
+        InputStream stream = getFileFromResourceAsStream(fileName);
+        try (InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(streamReader)) {
             String line;
             while ((line = reader.readLine()) != null) {
-                names.add(line);
+                lines.add(line);
             }
         } catch (IOException | NullPointerException e) {
             System.out.println("Не удалось прочитать файл ресурсов");
+            lines.add("нет данных");
             e.printStackTrace();
         } finally {
             try {
-                is.close();
+                stream.close();
             } catch (IOException | NullPointerException e) {
                 System.out.println("Ошибка ввода/вывода: не удалось закрыть поток");
                 e.printStackTrace();
             }
         }
+        return lines;
+    }
+
+    @Override
+    public void close() throws IOException {
+
     }
 }
