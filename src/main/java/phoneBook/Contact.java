@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class contact {
+public class Contact {
 
     private final String lastName;
     private final String firstName;
@@ -11,59 +11,51 @@ public class contact {
     private final Long phoneNumber;
     private final String typePhone;
     private String operator;
-    private List<contact> contacts;
+    private List<Contact> contacts;
 
-    public contact(String lastName,
-                   String firstName,
-                   String patronymic,
+    public Contact(String[] fio,
                    long phoneNumber,
                    String typePhone,
                    String operator) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
+        this.lastName = fio[0];
+        this.firstName = fio[1];
+        this.patronymic = fio[2];
         this.phoneNumber = phoneNumber;
         this.typePhone = typePhone;
         this.operator = operator;
         contacts = new ArrayList<>();
     }
 
-    public contact(String lastName,
-                   String firstName,
-                   String patronymic,
+    public Contact(String[] fio,
                    String phoneNumber,
                    String typePhone,
                    String operator) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
+        this.lastName = fio[0];
+        this.firstName = fio[1];
+        this.patronymic = fio[2];
         this.phoneNumber = parseNumber(phoneNumber);
         this.typePhone = typePhone;
         this.operator = operator;
         contacts = new ArrayList<>();
     }
 
-    public contact(String lastName,
-                   String firstName,
-                   String patronymic,
+    public Contact(String[] fio,
                    long phoneNumber,
                    String typePhone) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
+        this.lastName = fio[0];
+        this.firstName = fio[1];
+        this.patronymic = fio[2];
         this.phoneNumber = phoneNumber;
         this.typePhone = typePhone;
         contacts = new ArrayList<>();
     }
 
-    public contact(String lastName,
-                   String firstName,
-                   String patronymic,
+    public Contact(String[] fio,
                    String phoneNumber,
                    String typePhone) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
+        this.lastName = fio[0];
+        this.firstName = fio[1];
+        this.patronymic = fio[2];
         this.phoneNumber = parseNumber(phoneNumber);
         this.typePhone = typePhone;
         contacts = new ArrayList<>();
@@ -97,11 +89,11 @@ public class contact {
         return typePhone;
     }
 
-    public List<contact> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
-    public void setContact(contact contact) {
+    public void setContact(Contact contact) {
         contacts.add(contact);
     }
 

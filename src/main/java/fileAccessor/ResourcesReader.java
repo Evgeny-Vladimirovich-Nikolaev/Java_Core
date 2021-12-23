@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class ResourcesReader implements Closeable {
 
-    private ResourcesReader() {
-    }
+    private ResourcesReader() {}
 
     private static InputStream getFileFromResourceAsStream(String fileName) {
         try {
