@@ -27,37 +27,15 @@ public class Contact {
     }
 
     public Contact(String[] fio,
-                   String phoneNumber,
+                   String StringNumber,
                    String typePhone,
                    String operator) {
         this.lastName = fio[0];
         this.firstName = fio[1];
         this.patronymic = fio[2];
-        this.phoneNumber = parseNumber(phoneNumber);
+        this.phoneNumber = parseNumber(StringNumber);
         this.typePhone = typePhone;
         this.operator = operator;
-        contacts = new ArrayList<>();
-    }
-
-    public Contact(String[] fio,
-                   long phoneNumber,
-                   String typePhone) {
-        this.lastName = fio[0];
-        this.firstName = fio[1];
-        this.patronymic = fio[2];
-        this.phoneNumber = phoneNumber;
-        this.typePhone = typePhone;
-        contacts = new ArrayList<>();
-    }
-
-    public Contact(String[] fio,
-                   String phoneNumber,
-                   String typePhone) {
-        this.lastName = fio[0];
-        this.firstName = fio[1];
-        this.patronymic = fio[2];
-        this.phoneNumber = parseNumber(phoneNumber);
-        this.typePhone = typePhone;
         contacts = new ArrayList<>();
     }
 

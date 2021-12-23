@@ -1,63 +1,88 @@
-import java.security.KeyStore;
 import java.util.*;
 
 public class ContactBuilder {
 
-    private static TreeMap<Integer, String> operators = new TreeMap<>();
+    private static HashMap<Integer, String> operators;
+    private static List<Integer> codes;
+    private static List<Contact> contactList;
+    private static int number = 7_654_321;
 
-    private static List<Contact> contactList = new ArrayList<>();
+    ContactBuilder(int items) {
+        operators = OperatorsList.getOperators();
+        codes = OperatorsList.getCodes();
+        contactList = new ArrayList<>();
+        addContacts(items);
+    }
 
-    void addContacts(int item) {
-        for(int i = 0; i < item; i++) {
+    List<Contact> getContacts() {
+        return contactList;
+    }
+
+    static void addContacts(int item) {
+        for (int i = 0; i < item; i++) {
             contactList.add(create());
         }
     }
 
-    private Contact create() {
-        String[] names = NameCreator.createFIO();
-        LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
-        Hashtable<Integer, String> h = new Hashtable<>();
-        h.put(900, null);
-        h.put(902, null);
-
-        long number = 0;
-        return null;
+    static private Contact create() {
+        String[] fio = NameCreator.createFIO();
+        System.out.println(Arrays.toString(fio));
+        int code = codes.get(new Random().nextInt(codes.size()));
+        long phoneNumber =
+            8_000_000_00_00L
+            + code * 1_000_00_00L
+            + number++;
+        String operator = operators.get(code);
+        return new Contact(fio, phoneNumber, "мобильный", operator);
     }
 
-    ContactBuilder() {
-        ArrayList<String> numbers;
-        TreeMap<Integer, String> op = new TreeMap<>();
-        numbers = ResourcesReader.readLines("mts.txt");
-        for (String s : numbers) {
-            try {
-                Integer i = Integer.parseInt(s);
-                op.put(i, "Operator");
-                System.out.println(op.get(i));
-            } catch (NumberFormatException e) {
-                System.out.println("Не удалось распознать значение " + s);
-                e.printStackTrace();
-            }
-        }
-        System.out.println(op);
-
-    }
-
-
-}
-
-class NumberCreator {
-
-    private static int number = 7_654_321;
-
-    private int getNextNumber() {
-        return number++;
-    }
 }
 
 class OperatorsList {
-    private static HashMap<Integer, String> codes = new HashMap<>();
 
-    private OperatorsList(){}
+    private static String[][] files = new String[][]{
+            {"beeline.txt", "Билайн"},
+            {"megaFon.txt", "Мегафон"},
+            {"mts.txt", "МТС"},
+            {"rosTeleCom.txt", "Ростелеком"},
+            {"tele2.txt", "Tele2"}
+    };
+    private static ArrayList<Integer> codes = new ArrayList<>();
+    private static HashMap<Integer,  String> operators = new HashMap<>();
+
+    static {
+        fillCollections();
+    }
 
 
+
+    private OperatorsList() {}
+
+    private static void fillCollections() {
+        for (String[] arr : files) {
+            ArrayList<String> currentOperatorCodes = ResourcesReader.readLines(arr[0]);
+            for (String currentCode : currentOperatorCodes) {
+                Integer code;
+                try {
+                    code = Integer.parseInt(currentCode);
+                    if (code != null && code > 899 && code < 1000) {
+                        operators.put(code, arr[1]);
+                        codes.add(code);
+                    } else {
+                        System.out.println(currentCode + " - неправильный формат кода");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(currentCode + " - неправильный формат кода");
+                }
+            }
+        }
+    }
+
+    static HashMap<Integer,  String> getOperators() {
+        return operators;
+    }
+
+    static ArrayList<Integer> getCodes() {
+        return codes;
+    }
 }
