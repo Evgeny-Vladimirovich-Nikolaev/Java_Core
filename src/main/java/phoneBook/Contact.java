@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -92,5 +94,38 @@ public class Contact {
             System.out.println("\"" + number + "\" - неправильный формат номера");
         }
         return num;
+    }
+
+    private Long[] contactsToArray () {
+        Long[] numbersList = new Long[contacts.size()];
+        int ind = 0;
+        for (Contact contact : contacts) {
+            numbersList[ind++] = contact.getPhoneNumber();
+        }
+        return numbersList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Contact cnt)) return false;
+        return Objects.equals(phoneNumber, cnt.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Абонент "
+                + operator
+                + ":\n"
+                + lastName + " " + firstName + " " + patronymic + "\n"
+                + "Тип связи: " + typePhone + "\n"
+                + "Номер: " + phoneNumber + "\n"
+                + "Связанные контакты:\n"
+                + Arrays.toString(contactsToArray());
     }
 }

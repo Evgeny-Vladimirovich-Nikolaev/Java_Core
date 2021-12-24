@@ -26,7 +26,6 @@ public class ContactBuilder {
 
     static private Contact create() {
         String[] fio = NameCreator.createFIO();
-        System.out.println(Arrays.toString(fio));
         int code = codes.get(new Random().nextInt(codes.size()));
         long phoneNumber =
             8_000_000_00_00L
