@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -96,6 +98,16 @@ public class Contact {
         return num;
     }
 
+    public String numberToString() {
+        char[] c = phoneNumber.toString().toCharArray();
+        String s = phoneNumber.toString();
+        return String.format("+7 %s %s-%s-%s",
+                s.substring(1, 4),
+                s.substring(4, 7),
+                s.substring(7, 9),
+                s.substring(9));
+    }
+
     private Long[] contactsToArray () {
         Long[] numbersList = new Long[contacts.size()];
         int ind = 0;
@@ -124,7 +136,7 @@ public class Contact {
                 + ":\n"
                 + lastName + " " + firstName + " " + patronymic + "\n"
                 + "Тип связи: " + typePhone + "\n"
-                + "Номер: " + phoneNumber + "\n"
+                + "Номер: " + numberToString() + "\n"
                 + "Связанные контакты:\n"
                 + Arrays.toString(contactsToArray());
     }
