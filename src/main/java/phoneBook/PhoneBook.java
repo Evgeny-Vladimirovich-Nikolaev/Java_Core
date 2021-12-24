@@ -2,7 +2,7 @@ import java.util.*;
 
 public class PhoneBook {
 
-    private static final int SUBSCRIBERS = 10_000;
+    private static final int SUBSCRIBERS = 10_0;
     private static final int PHONEBOOK_LIMIT = 100;
     private static List<Contact> contactsList = new ContactBuilder(SUBSCRIBERS).getContacts();
     private static HashMap<Contact, Integer> contactsMap = new HashMap<>();
@@ -11,6 +11,7 @@ public class PhoneBook {
         fillContacts();
         fillTree();
         countContacts();
+        extracted();
     }
 
     private static void fillContacts() {
@@ -41,6 +42,47 @@ public class PhoneBook {
                contactsMap.put(caller, integer);
             }
         }
-        System.out.println(contactsMap);
+        System.out.println("ВСЕ НОМЕРА");
+        System.out.println("--------------------------------------------------------");
+        Iterator<Map.Entry<Contact, Integer>> entries = contactsMap.entrySet().iterator();
+        while (entries.hasNext()){
+            Contact currentContact = entries.next().getKey();
+            System.out.println(currentContact);
+            System.out.println("Количество использования номера другими абонентами для абонента ");
+            System.out.println(
+                    currentContact.getLastName() + " "
+                    + currentContact.getFirstName() + " "
+                    + currentContact.getPatronymic() + ":");
+            System.out.println(contactsMap.get(currentContact));
+        }
+    }
+
+    private static void extracted() {
+        System.out.println("ПОПУЛЯРНЫЕ НОМЕРА");
+        System.out.println("--------------------------------------------------------");
+
+        HashMap<Contact, Integer> popularContacts = new HashMap<>();
+        Iterator<Map.Entry<Contact, Integer>> entries = contactsMap.entrySet().iterator();
+        Integer integer = 0;
+        while (entries.hasNext()) {
+            Contact currentContact = entries.next().getKey();
+            if(contactsMap.get(currentContact) > integer) {
+                popularContacts.clear();
+                popularContacts.put(currentContact, contactsMap.get(currentContact));
+            } else if (contactsMap.get(currentContact) == integer) {
+                popularContacts.put(currentContact, contactsMap.get(currentContact));
+            }
+        }
+        entries = popularContacts.entrySet().iterator();
+        while (entries.hasNext()){
+            Contact currentContact = entries.next().getKey();
+            System.out.println(currentContact);
+            System.out.println("Количество использования номера другими абонентами для абонента ");
+            System.out.println(
+                    currentContact.getLastName() + " "
+                            + currentContact.getFirstName() + " "
+                            + currentContact.getPatronymic() + ":");
+            System.out.println(popularContacts.get(currentContact));
+        }
     }
 }
