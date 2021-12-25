@@ -1,3 +1,6 @@
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class PhoneBook {
@@ -10,17 +13,18 @@ public class PhoneBook {
     public static void main(String[] args) {
         fillContacts();
         fillTree();
-        countContacts();
-        extracted();
+        countRelatedContacts();
+        //printContactsMap();
+        findPopularContacts();
     }
 
     private static void fillContacts() {
         Random random = new Random();
         for (Contact currentContact : contactsList) {
             int j = random.nextInt(PHONEBOOK_LIMIT);
-            for(int i = 0; i < j; i++) {
+            for (int i = 0; i < j; i++) {
                 Contact randomCnt = contactsList.get(random.nextInt(SUBSCRIBERS));
-                if(!currentContact.equals(randomCnt) && !currentContact.getContacts().contains(randomCnt)) {
+                if (!currentContact.equals(randomCnt) && !currentContact.getContacts().contains(randomCnt)) {
                     currentContact.setContact(randomCnt);
                 }
             }
@@ -34,55 +38,66 @@ public class PhoneBook {
         }
     }
 
-    private static void countContacts() {
+    private static void countRelatedContacts() {
+        LocalDateTime start = LocalDateTime.now();
         for (Contact contact : contactsList) {
-            for (Contact caller : contact.getContacts()) {
-               Integer integer = contactsMap.get(caller);
-               integer++;
-               contactsMap.put(caller, integer);
+            for (Contact relatedContact : contact.getContacts()) {
+                int count = contactsMap.get(relatedContact);
+                count++;
+                contactsMap.replace(relatedContact, count);
             }
         }
+        LocalDateTime finish = LocalDateTime.now();
+        System.out.println(finish.getNano() - start.getNano());
+    }
+
+    private static void printContactsMap() {
         System.out.println("ВСЕ НОМЕРА");
-        System.out.println("--------------------------------------------------------");
-        contactsMap.forEach((currentContact, value) -> {
-            System.out.println(currentContact);
+        System.out.println("----------------------------------------------------------------------");
+        contactsMap.forEach((contact, value) -> {
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println(contact);
             System.out.println("Количество использования номера другими абонентами для абонента ");
-            System.out.println(
-                    currentContact.getLastName() + " "
-                            + currentContact.getFirstName() + " "
-                            + currentContact.getPatronymic() + ":");
-            System.out.println(contactsMap.get(currentContact));
+            System.out.println(contact.getFIO() + ":");
+            System.out.println(contactsMap.get(contact));
         });
     }
 
-    private static void extracted() {
+    private static void findPopularContacts() {
         System.out.println("ПОПУЛЯРНЫЕ НОМЕРА");
-        System.out.println("--------------------------------------------------------");
-
-        HashMap<Contact, Integer> popularContacts = new HashMap<>();
+        System.out.println("----------------------------------------------------------------------");
+        List<Contact> popularContacts = new ArrayList<>(10);
         Iterator<Map.Entry<Contact, Integer>> entries = contactsMap.entrySet().iterator();
         int max = 0;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+        Instant start = Instant.now();
         while (entries.hasNext()) {
             Contact currentContact = entries.next().getKey();
             int temp = contactsMap.get(currentContact);
-            if(temp > max) {
+            if (temp > max) {
                 max = temp;
                 popularContacts.clear();
-             }
+            }
             if (temp >= max) {
-                popularContacts.put(currentContact, contactsMap.get(currentContact));
+                popularContacts.add(currentContact);
             }
         }
-        entries = popularContacts.entrySet().iterator();
-        while (entries.hasNext()){
-            Contact currentContact = entries.next().getKey();
-            System.out.println(currentContact);
+        Instant finish = Instant.now();
+        long elapsed = Duration.between(start, finish).toMillis();
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        printContactsList(popularContacts);
+        System.out.println("time:");
+        System.out.println(elapsed);
+    }
+
+    private static void printContactsList(List<Contact> contacts) {
+        for (Contact contact : contacts) {
+            System.out.println(contact);
             System.out.println("Количество использования номера другими абонентами для абонента ");
-            System.out.println(
-                    currentContact.getLastName() + " "
-                            + currentContact.getFirstName() + " "
-                            + currentContact.getPatronymic() + ":");
-            System.out.println(popularContacts.get(currentContact));
+            System.out.println(contact.getFIO());
+            System.out.println(contactsMap.get(contact));
         }
     }
 }

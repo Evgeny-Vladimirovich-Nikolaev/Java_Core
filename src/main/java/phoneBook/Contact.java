@@ -108,6 +108,10 @@ public class Contact {
                 s.substring(9));
     }
 
+    public String getFIO() {
+        return lastName + " " + firstName + " " + patronymic;
+    }
+
     private Long[] contactsToArray () {
         Long[] numbersList = new Long[contacts.size()];
         int ind = 0;
@@ -134,7 +138,7 @@ public class Contact {
         return "Абонент "
                 + operator
                 + ":\n"
-                + lastName + " " + firstName + " " + patronymic + "\n"
+                + getFIO() + "\n"
                 + "Тип связи: " + typePhone + "\n"
                 + "Номер: " + numberToString() + "\n"
                 + "Связанные контакты:\n"
