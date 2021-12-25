@@ -1,9 +1,4 @@
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +10,8 @@ public class Contact {
     private final Long phoneNumber;
     private final String typePhone;
     private String operator;
-    private List<Contact> contacts;
+    private List<Contact> contactList;
+    private Contact[] contactArray;
 
     public Contact(String[] fio,
                    long phoneNumber,
@@ -27,20 +23,8 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.typePhone = typePhone;
         this.operator = operator;
-        contacts = new ArrayList<>();
-    }
-
-    public Contact(String[] fio,
-                   String StringNumber,
-                   String typePhone,
-                   String operator) {
-        this.lastName = fio[0];
-        this.firstName = fio[1];
-        this.patronymic = fio[2];
-        this.phoneNumber = parseNumber(StringNumber);
-        this.typePhone = typePhone;
-        this.operator = operator;
-        contacts = new ArrayList<>();
+        contactList = new ArrayList<>();
+        fillContactArray();
     }
 
     public String getLastName() {
@@ -71,31 +55,24 @@ public class Contact {
         return typePhone;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    public List<Contact> getContactList() {
+        return contactList;
     }
 
     public void setContact(Contact contact) {
-        contacts.add(contact);
+        contactList.add(contact);
     }
 
-    private Long parseNumber( String number) {
-        Long num = null;
-        number = number.replace(" ", "");
-        number = number.replace("+7", "8");
-        Pattern p = Pattern.compile("\\d+");
-        Matcher m = p.matcher(number);
-        String res = "";
-        while (m.find()) {
-            res += m.group();
+    void fillContactArray() {
+        this.contactArray = new Contact[contactList.size()];
+        int ind = 0;
+        for(Contact contact : this.contactList) {
+            this.contactArray[ind++] = contact;
         }
-        try {
-            num = Long.parseLong(res);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            System.out.println("\"" + number + "\" - неправильный формат номера");
-        }
-        return num;
+    }
+
+    public Contact[] getContactArray() {
+        return contactArray;
     }
 
     public String numberToString() {
@@ -113,9 +90,9 @@ public class Contact {
     }
 
     private Long[] contactsToArray () {
-        Long[] numbersList = new Long[contacts.size()];
+        Long[] numbersList = new Long[contactList.size()];
         int ind = 0;
-        for (Contact contact : contacts) {
+        for (Contact contact : contactList) {
             numbersList[ind++] = contact.getPhoneNumber();
         }
         return numbersList;
@@ -130,7 +107,7 @@ public class Contact {
 
     @Override
     public int hashCode() {
-        return Objects.hash(phoneNumber);
+        return Objects.hash(operator);
     }
 
     @Override

@@ -7,14 +7,25 @@ public class PhoneBook {
     private static final int SUBSCRIBERS = 10_000;
     private static final int PHONEBOOK_LIMIT = 100;
     private static List<Contact> contactsList = new ContactBuilder(SUBSCRIBERS).getContacts();
+    private static Contact[] contactsArray = contactsListToArray();
     private static HashMap<Contact, Integer> contactsMap = new HashMap<>();
 
     public static void main(String[] args) {
         fillContacts();
         fillTree();
-        countRelatedContacts();
+        countRelatedContactsByLists();
+        countRelatedContactsByArrays();
         //printContactsMap();
-        findPopularContacts();
+        findPopularContactsByMap();
+    }
+
+    private static Contact[] contactsListToArray() {
+        Contact[] array = new Contact[contactsList.size()];
+        int ind = 0;
+        for (Contact contact : contactsList) {
+            array[ind++] = contact;
+        }
+        return array;
     }
 
     private static void fillContacts() {
@@ -23,10 +34,11 @@ public class PhoneBook {
             int j = random.nextInt(PHONEBOOK_LIMIT);
             for (int i = 0; i < j; i++) {
                 Contact randomCnt = contactsList.get(random.nextInt(SUBSCRIBERS));
-                if (!currentContact.equals(randomCnt) && !currentContact.getContacts().contains(randomCnt)) {
+                if (!currentContact.equals(randomCnt) && !currentContact.getContactList().contains(randomCnt)) {
                     currentContact.setContact(randomCnt);
                 }
             }
+            currentContact.fillContactArray();
         }
     }
 
@@ -37,21 +49,38 @@ public class PhoneBook {
         }
     }
 
-    private static void countRelatedContacts() {
-//замеряемый по времени фрагмент кода
-///////////////////////////////////////////////////////////////////////////////////////////////////
+    private static void countRelatedContactsByLists() {
+        //замеряемый по времени фрагмент кода
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
         Instant start = Instant.now();
         for (Contact contact : contactsList) {
-            for (Contact relatedContact : contact.getContacts()) {
+            for (Contact relatedContact : contact.getContactList()) {
                 int count = contactsMap.get(relatedContact);
                 count++;
                 contactsMap.replace(relatedContact, count);
             }
         }
         Instant finish = Instant.now();
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        long walkingTreeTime = Duration.between(start, finish).toMillis();
-        System.out.println("Перебор основной и вложенных коллекций: " + walkingTreeTime + " мс");
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        long timeByLists = Duration.between(start, finish).toMillis();
+        System.out.println("Перебор основного и вложенных списков: " + timeByLists + " мс");
+    }
+
+    private static void countRelatedContactsByArrays() {
+        //замеряемый по времени фрагмент кода
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        Instant start = Instant.now();
+        for (Contact contact : contactsArray) {
+            for (Contact relatedContact : contact.getContactArray()) {
+                int count = contactsMap.get(relatedContact);
+                count++;
+                contactsMap.replace(relatedContact, count);
+            }
+        }
+        Instant finish = Instant.now();
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        long timeByArrays = Duration.between(start, finish).toMillis();
+        System.out.println("Перебор основного и вложенных массивов: " + timeByArrays + " мс");
     }
 
     private static void printContactsMap() {
@@ -66,13 +95,12 @@ public class PhoneBook {
         });
     }
 
-    private static void findPopularContacts() {
+    private static void findPopularContactsByMap() {
         List<Contact> popularContacts = new ArrayList<>();
         Iterator<Map.Entry<Contact, Integer>> entries = contactsMap.entrySet().iterator();
         int max = 0;
-
-//замеряемый по времени фрагмент кода
-///////////////////////////////////////////////////////////////////////////////////////////////////
+        //замеряемый по времени фрагмент кода
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
         Instant start = Instant.now();
         while (entries.hasNext()) {
             Contact currentContact = entries.next().getKey();
@@ -86,10 +114,9 @@ public class PhoneBook {
             }
         }
         Instant finish = Instant.now();
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        long walkingTreeTime = Duration.between(start, finish).toMillis();
-        System.out.println("Время обхода карты: " + walkingTreeTime + " мс");
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        long timeByMap = Duration.between(start, finish).toMillis();
+        System.out.println("Время обхода карты: " + timeByMap + " мс");
         printContactsList(popularContacts);
     }
 
@@ -103,4 +130,5 @@ public class PhoneBook {
             System.out.println(contactsMap.get(contact));
         }
     }
+
 }
