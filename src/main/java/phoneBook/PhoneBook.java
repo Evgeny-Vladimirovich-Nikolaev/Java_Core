@@ -1,6 +1,5 @@
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class PhoneBook {
@@ -39,7 +38,9 @@ public class PhoneBook {
     }
 
     private static void countRelatedContacts() {
-        LocalDateTime start = LocalDateTime.now();
+//замеряемый по времени фрагмент кода
+///////////////////////////////////////////////////////////////////////////////////////////////////
+        Instant start = Instant.now();
         for (Contact contact : contactsList) {
             for (Contact relatedContact : contact.getContacts()) {
                 int count = contactsMap.get(relatedContact);
@@ -47,8 +48,10 @@ public class PhoneBook {
                 contactsMap.replace(relatedContact, count);
             }
         }
-        LocalDateTime finish = LocalDateTime.now();
-        System.out.println(finish.getNano() - start.getNano());
+        Instant finish = Instant.now();
+////////////////////////////////////////////////////////////////////////////////////////////////////
+        long walkingTreeTime = Duration.between(start, finish).toMillis();
+        System.out.println("Перебор основной и вложенных коллекций: " + walkingTreeTime + " мс");
     }
 
     private static void printContactsMap() {
@@ -64,12 +67,11 @@ public class PhoneBook {
     }
 
     private static void findPopularContacts() {
-        System.out.println("ПОПУЛЯРНЫЕ НОМЕРА");
-        System.out.println("----------------------------------------------------------------------");
-        List<Contact> popularContacts = new ArrayList<>(10);
+        List<Contact> popularContacts = new ArrayList<>();
         Iterator<Map.Entry<Contact, Integer>> entries = contactsMap.entrySet().iterator();
         int max = 0;
 
+//замеряемый по времени фрагмент кода
 ///////////////////////////////////////////////////////////////////////////////////////////////////
         Instant start = Instant.now();
         while (entries.hasNext()) {
@@ -84,15 +86,16 @@ public class PhoneBook {
             }
         }
         Instant finish = Instant.now();
-        long elapsed = Duration.between(start, finish).toMillis();
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+        long walkingTreeTime = Duration.between(start, finish).toMillis();
+        System.out.println("Время обхода карты: " + walkingTreeTime + " мс");
 
         printContactsList(popularContacts);
-        System.out.println("time:");
-        System.out.println(elapsed);
     }
 
     private static void printContactsList(List<Contact> contacts) {
+        System.out.println("ПОПУЛЯРНЫЕ НОМЕРА");
+        System.out.println("----------------------------------------------------------------------");
         for (Contact contact : contacts) {
             System.out.println(contact);
             System.out.println("Количество использования номера другими абонентами для абонента ");
