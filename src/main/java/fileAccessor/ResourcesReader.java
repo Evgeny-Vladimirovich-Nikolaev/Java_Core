@@ -30,18 +30,37 @@ public class ResourcesReader {
                 lines.add(line);
             }
         } catch (IOException | NullPointerException e) {
-            System.out.println("Не удалось прочитать файл ресурсов");
+            System.out.println("Не удалось прочитать файл ресурсов " + fileName);
             lines.add("нет данных");
-            e.printStackTrace();
         } finally {
             try {
                 stream.close();
             } catch (IOException | NullPointerException e) {
                 System.out.println("Ошибка ввода/вывода: не удалось закрыть поток");
-                e.printStackTrace();
             }
         }
         return lines;
+    }
+
+    public static String readText(String fileName) {
+        StringBuilder sb = new StringBuilder();
+        InputStream stream = getFileFromResourceAsStream(fileName);
+        try (InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(streamReader)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException | NullPointerException e) {
+            System.out.println("Не удалось прочитать файл ресурсов" + fileName);
+        } finally {
+            try {
+                stream.close();
+            } catch (IOException | NullPointerException e) {
+                System.out.println("Ошибка ввода/вывода: не удалось закрыть поток");
+            }
+        }
+        return sb.toString();
     }
 
 }
