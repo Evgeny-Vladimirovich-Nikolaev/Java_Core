@@ -29,18 +29,6 @@ public class Contact {
         fillCallersCollections();
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
     public String getMobileOperator() {
         return operator;
     }
