@@ -116,7 +116,7 @@ public class Contact {
 
     @Override
     public int hashCode() {
-        return Objects.hash(operator);
+        return Objects.hash(phoneNumber);
     }
 
     @Override
