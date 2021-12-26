@@ -1,12 +1,14 @@
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 public class WordsCounter {
 
-
-    private WordsCounter() {}
-
     public static void wordsCount(String text) {
-        Map<String, Integer> words = (Map<String, Integer>) Stream.of(text);
+        List<String> list = Arrays.asList(text.toLowerCase().split("[ ,.!/?;:]+"));
+        Map<String, Integer> counts = list.stream()
+                .collect(Collectors.toConcurrentMap(w -> w, w -> 1, Integer::sum));
+        counts.entrySet().forEach(System.out::println);
     }
+
 }
