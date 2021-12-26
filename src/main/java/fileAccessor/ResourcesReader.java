@@ -2,7 +2,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class ResourcesReader implements Closeable {
+public class ResourcesReader {
 
     private ResourcesReader() {}
 
@@ -20,7 +20,7 @@ public class ResourcesReader implements Closeable {
         }
     }
 
-    public static ArrayList<String> readLines(String fileName) {
+    public static ArrayList<String> readByLines(String fileName) {
         ArrayList<String> lines = new ArrayList<>();
         InputStream stream = getFileFromResourceAsStream(fileName);
         try (InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
@@ -44,8 +44,4 @@ public class ResourcesReader implements Closeable {
         return lines;
     }
 
-    @Override
-    public void close() throws IOException {
-
-    }
 }

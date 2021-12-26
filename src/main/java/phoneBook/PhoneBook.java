@@ -90,7 +90,7 @@ public class PhoneBook {
             System.out.println("----------------------------------------------------------------------");
             System.out.println(contact);
             System.out.println("Количество использования номера другими абонентами для абонента ");
-            System.out.println(contact.getFIO() + ":");
+            System.out.print(contact.getFIO() + ":");
             System.out.println(contactsMap.get(contact));
         });
     }
@@ -126,7 +126,7 @@ public class PhoneBook {
         for (Contact contact : contacts) {
             System.out.println(contact);
             System.out.println("Количество использования номера другими абонентами для абонента ");
-            System.out.println(contact.getFIO());
+            System.out.print(contact.getFIO() + ":");
             System.out.println(contactsMap.get(contact));
         }
     }

@@ -59,7 +59,7 @@ class OperatorsList {
 
     private static void fillCollections() {
         for (String[] arr : files) {
-            ArrayList<String> currentOperatorCodes = ResourcesReader.readLines(arr[0]);
+            ArrayList<String> currentOperatorCodes = ResourcesReader.readByLines(arr[0]);
             for (String currentCode : currentOperatorCodes) {
                 Integer code;
                 try {

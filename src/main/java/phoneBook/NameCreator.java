@@ -26,7 +26,7 @@ public class NameCreator {
     }
 
     private static ArrayList<String> getNamesList(String fileName) {
-        return ResourcesReader.readLines(fileName);
+        return ResourcesReader.readByLines(fileName);
     }
 
     private static String name (ArrayList<String> names) {
