@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Contact {
 
@@ -10,8 +8,9 @@ public class Contact {
     private final Long phoneNumber;
     private final String typePhone;
     private String operator;
-    private List<Contact> contactList;
-    private Contact[] contactArray;
+    private List<Contact> callersList;
+    private HashSet<Contact> callersSet;
+    private Contact[] callersArray;
 
     public Contact(String[] fio,
                    long phoneNumber,
@@ -23,8 +22,9 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.typePhone = typePhone;
         this.operator = operator;
-        contactList = new ArrayList<>();
-        fillContactArray();
+        callersList = new ArrayList<>();
+        callersSet = new HashSet<>();
+        fillCallersCollections();
     }
 
     public String getLastName() {
@@ -43,10 +43,6 @@ public class Contact {
         return operator;
     }
 
-    public void setMobileOperator(String mobileOperator) {
-        this.operator = mobileOperator;
-    }
-
     public long getPhoneNumber() {
         return phoneNumber;
     }
@@ -55,24 +51,29 @@ public class Contact {
         return typePhone;
     }
 
-    public List<Contact> getContactList() {
-        return contactList;
+    public List<Contact> getCallersList() {
+        return callersList;
     }
 
     public void setContact(Contact contact) {
-        contactList.add(contact);
+        callersList.add(contact);
     }
 
-    void fillContactArray() {
-        this.contactArray = new Contact[contactList.size()];
+    void fillCallersCollections() {
+        callersArray = new Contact[callersList.size()];
         int ind = 0;
-        for(Contact contact : this.contactList) {
-            this.contactArray[ind++] = contact;
+        for(Contact contact : callersList) {
+            callersArray[ind++] = contact;
+            callersSet.add(contact);
         }
     }
 
-    public Contact[] getContactArray() {
-        return contactArray;
+    public Contact[] getCallersArray() {
+        return callersArray;
+    }
+
+    public HashSet<Contact> getCallersSet() {
+        return callersSet;
     }
 
     public String numberToString() {
@@ -90,9 +91,9 @@ public class Contact {
     }
 
     private Long[] contactsToArray () {
-        Long[] numbersList = new Long[contactList.size()];
+        Long[] numbersList = new Long[callersList.size()];
         int ind = 0;
-        for (Contact contact : contactList) {
+        for (Contact contact : callersList) {
             numbersList[ind++] = contact.getPhoneNumber();
         }
         return numbersList;
@@ -101,7 +102,8 @@ public class Contact {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof Contact cnt)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact cnt = (Contact) o;
         return Objects.equals(phoneNumber, cnt.phoneNumber);
     }
 
