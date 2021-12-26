@@ -11,6 +11,7 @@ public class Contact {
     private List<Contact> callersList;
     private HashSet<Contact> callersSet;
     private Contact[] callersArray;
+    private HashMap<Contact, Long> callersMap;
 
     public Contact(String[] fio,
                    long phoneNumber,
@@ -24,6 +25,7 @@ public class Contact {
         this.operator = operator;
         callersList = new ArrayList<>();
         callersSet = new HashSet<>();
+        callersMap = new HashMap<>();
         fillCallersCollections();
     }
 
@@ -62,9 +64,10 @@ public class Contact {
     void fillCallersCollections() {
         callersArray = new Contact[callersList.size()];
         int ind = 0;
-        for(Contact contact : callersList) {
-            callersArray[ind++] = contact;
-            callersSet.add(contact);
+        for(Contact caller : callersList) {
+            callersArray[ind++] = caller;
+            callersSet.add(caller);
+            callersMap.put(caller,caller.phoneNumber);
         }
     }
 
@@ -74,6 +77,10 @@ public class Contact {
 
     public HashSet<Contact> getCallersSet() {
         return callersSet;
+    }
+
+    public HashMap getCallersMap() {
+        return callersMap;
     }
 
     public String numberToString() {
