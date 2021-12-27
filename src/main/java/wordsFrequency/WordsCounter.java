@@ -1,14 +1,21 @@
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class WordsCounter {
 
     public static void wordsCount(String text) {
-        List<String> list = Arrays.asList(text.toLowerCase().split("[ ,.!/?;:]+"));
-        Map<String, Integer> counts = list.stream()
-                .collect(Collectors.toConcurrentMap(w -> w, w -> 1, Integer::sum));
-        counts.entrySet().forEach(System.out::println);
+        Map<String, Long> counts = Stream.of(text.toLowerCase())
+                .map(t -> t.split("[ .,:;?!/\"]+"))
+                .flatMap(strings -> Arrays.stream(strings))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue(Comparator.reverseOrder())
+                        .thenComparing(Map.Entry.comparingByKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
+        counts.entrySet().stream().forEach(i -> System.out.println(i));
     }
 
 }
