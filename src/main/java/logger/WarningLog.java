@@ -1,7 +1,7 @@
 public class WarningLog extends Thread{
 
     WarningLog() {
-        printSelf();
+
     }
 
     void printSelf() {
@@ -14,5 +14,10 @@ public class WarningLog extends Thread{
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    @Override
+    public void  run() {
+        printSelf();
     }
 }

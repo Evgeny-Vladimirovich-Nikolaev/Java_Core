@@ -1,7 +1,7 @@
 public class ErrorLog extends Thread{
 
     ErrorLog() {
-        printSelf();
+
     }
 
     void printSelf() {
@@ -14,5 +14,10 @@ public class ErrorLog extends Thread{
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    @Override
+    public void  run() {
+        printSelf();
     }
 }
