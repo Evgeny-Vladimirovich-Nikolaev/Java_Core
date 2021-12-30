@@ -2,19 +2,10 @@ import java.util.Random;
 
 public class LoggerFactory {
 
-    private static String[] status = new String[] {
-            "ERROR",
-            "WARN",
-            "INFO",
-            "DEBUG",
-            "TRACE",
-            "ALL"
-    };
-    private static int logThreshold = 1;
+    private static String[] status = new String[] { "ERROR", "WARN", "INFO", "DEBUG", "TRACE" };
+    private static final String logLevel = "INFO";
 
     Logger getLogger() {
-        String logStatus = status[new Random().nextInt(status.length)];
-        //TODO
-        return null;
+        return new Logger (status[new Random().nextInt(status.length)], logLevel);
     }
 }

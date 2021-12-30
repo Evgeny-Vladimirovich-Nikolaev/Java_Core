@@ -1,19 +1,24 @@
 public enum LogLevel {
 
-    ERROR(5),
-    WARN(4),
-    INFO(3),
-    DEBUG(2),
-    TRACE(1),
-    ALL(0);
+    ERROR(4, "Ошибка выполнения"),
+    WARN(3, "Предупреждение"),
+    INFO(2, "Отчет выполнения программы"),
+    DEBUG(1, "Информация отладки"),
+    TRACE(0, "Трассировка стека");
 
     private int level;
+    private String msg;
 
-    LogLevel(int level) {
+    LogLevel(int level, String msg) {
         this.level = level;
+        this.msg = msg;
     }
 
-    public static int getLevel(String s) {
-        return valueOf(s).level;
+    public static int getLevel(String status) {
+        return valueOf(status).level;
     }
-}
+
+    public static String getMsg(String status) {
+        return valueOf(status).msg;
+    }
+ }

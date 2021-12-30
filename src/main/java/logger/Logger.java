@@ -5,34 +5,54 @@ import java.time.format.DateTimeFormatter;
 
 public class Logger {
 
-    private String msg;
     private String status;
-    private int level;
+    private int currentLevel;
+    private int minLevel;
+    private String msg;
+    private static String fileName;
 
-    Logger(String msg, String status) {
-        this.msg = msg;
+    Logger(String status, String logLevel) {
         this.status = status;
-        this.level = LogLevel.getLevel(status);
+        this.currentLevel = LogLevel.getLevel(status);
+        this.minLevel = LogLevel.getLevel(logLevel);
+        this.msg = LogLevel.getMsg(status);
+        writeLog();
     }
 
-    void writeLog(String fileName) {
-        String log = time() + " "
-                    + "log status: "+ status + " "
-                    + "thread name: " + Thread.currentThread().getName() + " "
-                    + msg + " ";
-        try{
-            BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(fileName, true));
-            writer.write(log);
-            writer.flush();
-            writer.close();
-        }catch(IOException err){
-            System.out.println(LoggerMsg.IO_ERROR.getMsg());
+    void writeLog() {
+        String log = createLog();
+        if (currentLevel >= minLevel) {
+            writeFile(log);
+        } else {
+            print(log);
         }
+    }
+
+    private String createLog() {
+        return time() + " "
+                + "log status: " + status + " "
+                + "thread name: " + Thread.currentThread().getName() + " "
+                + msg + " ";
     }
 
     private String time() {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return time.format(formatter);
+    }
+
+    private void writeFile(String log) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(fileName, true));
+            writer.write(log);
+            writer.flush();
+            writer.close();
+        } catch (IOException err) {
+            System.out.println(LoggerMsg.IO_ERROR.getMsg());
+        }
+    }
+
+    private void print(String log) {
+        System.out.println(log);
     }
 }
