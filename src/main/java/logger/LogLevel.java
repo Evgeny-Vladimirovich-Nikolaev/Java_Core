@@ -1,10 +1,11 @@
 public enum LogLevel {
 
-    ERROR(10),
-    WARN(6),
-    INFO(4),
+    ERROR(5),
+    WARN(4),
+    INFO(3),
     DEBUG(2),
-    TRACE(1);
+    TRACE(1),
+    ALL(0);
 
     private int level;
 

@@ -6,17 +6,18 @@ import java.time.format.DateTimeFormatter;
 public class Logger {
 
     private String msg;
-    private String level;
+    private String status;
+    private int level;
 
-
-    Logger(String msg, String level) {
+    Logger(String msg, String status) {
         this.msg = msg;
-        this.level = level;
+        this.status = status;
+        this.level = LogLevel.getLevel(status);
     }
 
     void writeLog(String fileName) {
         String log = time() + " "
-                    + "log level: "+ level + " "
+                    + "log status: "+ status + " "
                     + "thread name: " + Thread.currentThread().getName() + " "
                     + msg + " ";
         try{
