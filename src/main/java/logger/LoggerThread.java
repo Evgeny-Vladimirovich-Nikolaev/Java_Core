@@ -3,6 +3,12 @@ import java.util.Random;
 
 public class LoggerThread extends Thread{
 
+    private String logLevel;
+
+    LoggerThread(String logLevel) {
+     this.logLevel = logLevel;
+    }
+
     @Override
     public void run() {
         Instant start = Instant.now();
@@ -20,6 +26,6 @@ public class LoggerThread extends Thread{
 
     private void createNewLog() {
         LoggerFactory loggerFactory = new LoggerFactory();
-        Logger logger = loggerFactory.getLogger();
+        Logger logger = loggerFactory.getLogger(logLevel);
     }
 }

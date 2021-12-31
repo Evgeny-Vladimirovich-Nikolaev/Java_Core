@@ -8,14 +8,14 @@ public class LogRunner {
     }
 
     private static void runThreads() {
-        LoggerThread loggerThread_2 = new LoggerThread();
-        loggerThread_2.setName("Поток_2");
+        LoggerThread loggerThread_2 = new LoggerThread("DEBUG");
+        loggerThread_2.setName("Отладчик");
         loggerThread_2.start();
-        LoggerThread loggerThread_3 = new LoggerThread();
-        loggerThread_3.setName("Поток_3");
+        LoggerThread loggerThread_3 = new LoggerThread("INFO");
+        loggerThread_3.setName("Отчёты");
         loggerThread_3.start();
-        LoggerThread loggerThread_4 = new LoggerThread();
-        loggerThread_4.setName("Поток_4");
+        LoggerThread loggerThread_4 = new LoggerThread("WARN");
+        loggerThread_4.setName("Предупреждения");
         loggerThread_4.start();
     }
 }
