@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class LogRunner {
 
-    private static String logFile = "./src/main/java/logger/log.txt";
+    private static String logFile = "./src/main/resources/log.txt";
 
     public static void main(String[] args) {
         Logger.fileName = logFile;
