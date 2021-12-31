@@ -40,6 +40,7 @@ public class LoggerThread extends Thread{
                 Thread.sleep((new Random().nextLong(5L) + 1) * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
             finish = Instant.now();
         }
