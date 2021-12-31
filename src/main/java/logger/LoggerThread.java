@@ -1,4 +1,5 @@
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class LoggerThread extends Thread{
@@ -18,13 +19,15 @@ public class LoggerThread extends Thread{
     }
 
     private void printMessage() {
-        Instant threadStart = Instant.now();
+        LocalTime time = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         System.out.println(
-                threadStart +
+                time.format(formatter) +
                 " Старт потока" + "\n"
                 + "Статус потока: " + logLevel + "\n"
                 + "Идентификатор: " + Thread.currentThread().getName() + "\n"
                 + msg
+                + "\n-------------------------------------------------------------------"
         );
     }
 

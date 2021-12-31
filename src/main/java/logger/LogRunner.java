@@ -37,8 +37,12 @@ public class LogRunner {
         }
     }
 
-    private static void readLogFile() {
-        String log = ResourcesReader.readText(logFile = "log.txt");
-        System.out.println(log);
+    private synchronized static void readLogFile() {
+        ArrayList<String> log = ResourcesReader.readByLines("log.txt");
+        System.out.println("\n-------------------------------------------------------------------");
+        System.out.println("ЧТЕНИЕ ЛОГ-ФАЙЛА");
+        for (String s : log) {
+            System.out.println(s);
+        }
     }
 }
