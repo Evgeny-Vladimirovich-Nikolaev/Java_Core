@@ -9,7 +9,7 @@ public class Logger {
     private int currentLevel;
     private int minLevel;
     private String msg;
-    private static String fileName;
+    static String fileName;
 
     Logger(String status, String logLevel) {
         this.status = status;
@@ -20,7 +20,7 @@ public class Logger {
     }
 
     void writeLog() {
-        String log = createLog();
+        String log = createLogText();
         if (currentLevel >= minLevel) {
             writeFile(log);
         } else {
@@ -28,11 +28,11 @@ public class Logger {
         }
     }
 
-    private String createLog() {
+    private String createLogText() {
         return time() + " "
                 + "log status: " + status + " "
                 + "thread name: " + Thread.currentThread().getName() + " "
-                + msg + " ";
+                + msg + "\n";
     }
 
     private String time() {
@@ -41,7 +41,7 @@ public class Logger {
         return time.format(formatter);
     }
 
-    private void writeFile(String log) {
+    private synchronized void writeFile(String log) {
         try {
             BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(fileName, true));
             writer.write(log);
@@ -49,10 +49,11 @@ public class Logger {
             writer.close();
         } catch (IOException err) {
             System.out.println(LoggerMsg.IO_ERROR.getMsg());
+            err.printStackTrace();
         }
     }
 
-    private void print(String log) {
-        System.out.println(log);
+    private synchronized void print(String log) {
+        System.out.print(log);
     }
 }
