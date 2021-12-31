@@ -63,4 +63,11 @@ public class ResourcesReader {
         return sb.toString();
     }
 
+    public static void printConsole(String path) throws IOException {
+        FileReader reader = new FileReader(path);
+        int c;
+        while ((c = reader.read()) != -1) {
+            System.out.print((char) c);
+        }
+    }
 }

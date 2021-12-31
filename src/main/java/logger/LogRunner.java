@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.io.IOException;
 
 /**
  * В программе создаётся 3 побочных потока с разным уровнем логирования (TRACE, DEBUG, INFO).
@@ -38,11 +38,13 @@ public class LogRunner {
     }
 
     private synchronized static void readLogFile() {
-        ArrayList<String> log = ResourcesReader.readByLines("log.txt");
         System.out.println("\n-------------------------------------------------------------------");
         System.out.println("ЧТЕНИЕ ЛОГ-ФАЙЛА");
-        for (String s : log) {
-            System.out.println(s);
+        try {
+            ResourcesReader.printConsole(logFile);
+        } catch (IOException e) {
+            System.out.println(LoggerMsg.IO_ERROR.getMsg());
+            e.printStackTrace();
         }
     }
 }
