@@ -31,10 +31,11 @@ public class LoggerThread extends Thread{
         );
     }
 
+    //Метод вызывает createNewLog() в течение 60 секунд со случайной задержкой
     private void startLogging() {
         Instant start = Instant.now();
         Instant finish = start;
-        while(Duration.between(start, finish).toMillis() < 60_000L) {
+        while(Duration.between(start, finish).toMillis() < 60_000) {
             createNewLog();
             try {
                 Thread.sleep((new Random().nextLong(5L) + 1) * 1000);
