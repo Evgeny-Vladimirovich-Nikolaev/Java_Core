@@ -53,7 +53,7 @@ public class LoggerCallable extends Thread implements Callable<Void> {
     }
 
     private void createNewLog() {
-        new LoggerFactory().getLogger(logLevel);
+        new LoggerFactoryExe().getExeLog(logLevel, loggerName);
     }
 
 }

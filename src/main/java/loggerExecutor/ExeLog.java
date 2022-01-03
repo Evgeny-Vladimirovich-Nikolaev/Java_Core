@@ -5,17 +5,20 @@ import java.time.format.DateTimeFormatter;
 
 public class ExeLog {
 
+
+    static String fileName;
     private String status;
     private int currentLevel;
     private int minLevel;
     private String msg;
-    static String fileName;
+    String loggerName;
 
-    ExeLog(String status, String logLevel) {
+    ExeLog(String status, String logLevel, String loggerName) {
         this.status = status;
         this.currentLevel = LogLevel.getLevel(status);
         this.minLevel = LogLevel.getLevel(logLevel);
         this.msg = LogLevel.getMsg(status);
+        this.loggerName = loggerName;
         writeLog();
     }
 
@@ -29,9 +32,9 @@ public class ExeLog {
     }
 
     private String createLogText() {
-        return time() + " "
-                + "log status: " + status + " "
-                + "thread name: " + Thread.currentThread().getName() + " "
+        return time() + " / "
+                + "log status: " + status + " / "
+                + "thread name: " + loggerName + " / "
                 + msg + "\n";
     }
 

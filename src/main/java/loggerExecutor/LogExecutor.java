@@ -17,7 +17,7 @@ public class LogExecutor {
     private final static String logFile = "./src/main/resources/executorLog.txt";
 
     public static void main(String[] args) {
-        Log.fileName = logFile;
+        ExeLog.fileName = logFile;
         exeCallables();
         readLogFile();
     }

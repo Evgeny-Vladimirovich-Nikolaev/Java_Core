@@ -29,9 +29,9 @@ public class Log {
     }
 
     private String createLogText() {
-        return time() + " "
-                + "log status: " + status + " "
-                + "thread name: " + Thread.currentThread().getName() + " "
+        return time() + " / "
+                + "log status: " + status + " / "
+                + "thread name: " + Thread.currentThread().getName() + " / "
                 + msg + "\n";
     }
 
