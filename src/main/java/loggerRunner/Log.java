@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Logger {
+public class Log {
 
     private String status;
     private int currentLevel;
@@ -11,7 +11,7 @@ public class Logger {
     private String msg;
     static String fileName;
 
-    Logger(String status, String logLevel) {
+    Log(String status, String logLevel) {
         this.status = status;
         this.currentLevel = LogLevel.getLevel(status);
         this.minLevel = LogLevel.getLevel(logLevel);

@@ -8,7 +8,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/phoneBook" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/wordsFrequency" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java/logger" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/executors" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/loggerExecutor" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/loggerRunner" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
