@@ -1,15 +1,18 @@
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-public class Maximum implements Callable<Long> {
+public class Addition implements Callable<Long> {
 
     private ArrayList<Long> longList;
 
-    Maximum(ArrayList<Long> longList) {
+    Addition(ArrayList<Long> longList) {
         this.longList = longList;
     }
+
     @Override
     public Long call() throws Exception {
-        return longList.stream().max(Long::compare).get();
+        Long sum = 0L;
+        for (Long i : longList) sum += i;
+        return sum;
     }
 }

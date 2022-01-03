@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-public class Minimum extends CallableInt implements Callable<Integer> {
+public class Minimum implements Callable<Long> {
 
-    private ArrayList<Integer> integerList;
+    private ArrayList<Long> longList;
 
-    Minimum(ArrayList<Integer> integerList) {
-        this.integerList = integerList;
+    Minimum(ArrayList<Long> longList) {
+        this.longList = longList;
     }
     @Override
-    public Integer call() throws Exception {
-        return integerList.stream().min(Integer::compare).get();
+    public Long call() throws Exception {
+        return longList.stream().min(Long::compare).get();
     }
 }
