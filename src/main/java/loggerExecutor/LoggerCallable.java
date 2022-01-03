@@ -7,17 +7,24 @@ public class LoggerCallable extends Thread implements Callable<Void> {
 
     private String logLevel;
     private String msg;
+    private final String loggerName;
 
-
-    LoggerCallable(String logLevel, String msg) {
+    LoggerCallable(String logLevel, String msg, String loggerName) {
         this.logLevel = logLevel;
         this.msg = msg;
+        this.loggerName = loggerName;
      }
 
     @Override
-    public Void call() throws Exception {
-        printMessage();
-        startLogging();
+    public Void call() {
+        try {
+            printMessage();
+            startLogging();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
         return null;
     }
 
@@ -28,24 +35,19 @@ public class LoggerCallable extends Thread implements Callable<Void> {
                 time.format(formatter) +
                         " Старт потока" + "\n"
                         + "Статус потока: " + logLevel + "\n"
-                        + "Идентификатор: " + Thread.currentThread().getName() + "\n"
+                        + "Идентификатор: " + loggerName + "\n"
                         + msg
                         + "\n-------------------------------------------------------------------"
         );
     }
 
     //Метод вызывает createNewLog() в течение 60 секунд со случайной задержкой
-    private void startLogging() {
+    private void startLogging() throws InterruptedException {
         Instant start = Instant.now();
         Instant finish = start;
         while (Duration.between(start, finish).toMillis() < 60_000) {
             createNewLog();
-            try {
-                Thread.sleep((new Random().nextLong(5L) + 1) * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace(System.out);
-                Thread.currentThread().interrupt();
-            }
+            Thread.sleep((new Random().nextLong(5L) + 1) * 1000);
             finish = Instant.now();
         }
     }

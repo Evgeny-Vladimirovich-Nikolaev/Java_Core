@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+
 
 /**
  * Так же как и в LogRunner, в программе создаётся 3 побочных потока с разным уровнем логирования
@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
 
 public class LogExecutor {
 
-    private static String logFile = "./src/main/resources/executorLog.txt";
+    private final static String logFile = "./src/main/resources/executorLog.txt";
 
     public static void main(String[] args) {
         Log.fileName = logFile;
@@ -28,15 +28,15 @@ public class LogExecutor {
         List<LoggerCallable> tasks = new ArrayList<>();
 
         LoggerCallable logger_Callable_2 = new LoggerCallable
-                ("TRACE", LoggerMsg.TRACE_DESCRIPTION.getMsg());
+                ("TRACE", LoggerMsg.TRACE_DESCRIPTION.getMsg(), "Трассировщик");
 
 
         LoggerCallable logger_Callable_3 = new LoggerCallable
-                ("DEBUG", LoggerMsg.DEBUG_DESCRIPTION.getMsg());
+                ("DEBUG", LoggerMsg.DEBUG_DESCRIPTION.getMsg(), "Отладчик");
 
 
         LoggerCallable logger_Callable_4 = new LoggerCallable
-                ("INFO", LoggerMsg.INFO_DESCRIPTION.getMsg());
+                ("INFO", LoggerMsg.INFO_DESCRIPTION.getMsg(), "Отчёты");
 
 
 
@@ -44,13 +44,13 @@ public class LogExecutor {
         tasks.add(logger_Callable_3);
         tasks.add(logger_Callable_4);
 
-        List<Future<Void>> futures;
-
-
         try {
-            futures = executorService.invokeAll(tasks);
+            executorService.invokeAll(tasks);
             executorService.shutdown();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+            Thread.currentThread().interrupt();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
