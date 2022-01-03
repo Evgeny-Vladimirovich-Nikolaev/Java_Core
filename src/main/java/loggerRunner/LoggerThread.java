@@ -38,7 +38,7 @@ public class LoggerThread extends Thread{
         while(Duration.between(start, finish).toMillis() < 60_000) {
             createNewLog();
             try {
-                Thread.sleep((new Random().nextLong(5L) + 1) * 1000);
+                Thread.sleep((new Random().nextInt(5) + 1) * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 Thread.currentThread().interrupt();

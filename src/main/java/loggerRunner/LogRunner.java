@@ -30,7 +30,7 @@ public class LogRunner {
         loggerThread_4.setName("Отчёты");
         loggerThread_4.start();
         try {
-            Thread.sleep(60_000L);
+            Thread.sleep(60_000);
         } catch (InterruptedException e) {
             e.printStackTrace();
             Thread.currentThread().interrupt();

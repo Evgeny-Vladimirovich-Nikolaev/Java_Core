@@ -29,16 +29,10 @@ public class LogExecutor {
 
         LoggerCallable logger_Callable_2 = new LoggerCallable
                 ("TRACE", LoggerMsg.TRACE_DESCRIPTION.getMsg(), "Трассировщик");
-
-
         LoggerCallable logger_Callable_3 = new LoggerCallable
                 ("DEBUG", LoggerMsg.DEBUG_DESCRIPTION.getMsg(), "Отладчик");
-
-
         LoggerCallable logger_Callable_4 = new LoggerCallable
                 ("INFO", LoggerMsg.INFO_DESCRIPTION.getMsg(), "Отчёты");
-
-
 
         tasks.add(logger_Callable_2);
         tasks.add(logger_Callable_3);
@@ -53,9 +47,6 @@ public class LogExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
 
     }
 

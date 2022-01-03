@@ -47,7 +47,7 @@ public class LoggerCallable extends Thread implements Callable<Void> {
         Instant finish = start;
         while (Duration.between(start, finish).toMillis() < 60_000) {
             createNewLog();
-            Thread.sleep((new Random().nextLong(5L) + 1) * 1000);
+            Thread.sleep((new Random().nextInt(5) + 1) * 1000);
             finish = Instant.now();
         }
     }
