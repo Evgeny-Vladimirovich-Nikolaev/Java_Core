@@ -2,14 +2,16 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class LoggerThread extends Thread{
+public class LoggerRunnable extends Thread {
 
+    private final String PATH;
     private String logLevel;
     private String msg;
 
-    LoggerThread(String logLevel, String msg) {
-     this.logLevel = logLevel;
-     this.msg = msg;
+    LoggerRunnable(String PATH, String logLevel, String msg) {
+        this.PATH = PATH;
+        this.logLevel = logLevel;
+        this.msg = msg;
     }
 
     @Override
@@ -23,11 +25,11 @@ public class LoggerThread extends Thread{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         System.out.println(
                 time.format(formatter) +
-                " Старт потока" + "\n"
-                + "Статус потока: " + logLevel + "\n"
-                + "Идентификатор: " + Thread.currentThread().getName() + "\n"
-                + msg
-                + "\n-------------------------------------------------------------------"
+                        " Старт потока" + "\n"
+                        + "Статус потока: " + logLevel + "\n"
+                        + "Идентификатор: " + Thread.currentThread().getName() + "\n"
+                        + msg
+                        + "\n-------------------------------------------------------------------"
         );
     }
 
@@ -35,7 +37,7 @@ public class LoggerThread extends Thread{
     private void startLogging() {
         Instant start = Instant.now();
         Instant finish = start;
-        while(Duration.between(start, finish).toMillis() < 60_000) {
+        while (Duration.between(start, finish).toMillis() < 60_000) {
             createNewLog();
             try {
                 Thread.sleep((new Random().nextInt(5) + 1) * 1000);
@@ -48,6 +50,6 @@ public class LoggerThread extends Thread{
     }
 
     private void createNewLog() {
-        new LoggerFactory().getLogger(logLevel);
+        new LogFactory().getLog(PATH, logLevel);
     }
 }

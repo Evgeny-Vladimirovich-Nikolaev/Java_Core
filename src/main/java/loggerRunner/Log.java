@@ -5,21 +5,35 @@ import java.time.format.DateTimeFormatter;
 
 public class Log {
 
+
+    private String PATH;
     private String status;
     private int currentLevel;
     private int minLevel;
     private String msg;
-    static String fileName;
+    String threadName;
 
-    Log(String status, String logLevel) {
+    public Log(String path, String status, String logLevel) {
+        this.PATH = path;
         this.status = status;
         this.currentLevel = LogLevel.getLevel(status);
         this.minLevel = LogLevel.getLevel(logLevel);
         this.msg = LogLevel.getMsg(status);
+        this.threadName = Thread.currentThread().getName();
         writeLog();
     }
 
-    void writeLog() {
+    public Log(String path, String status, String logLevel, String threadName) {
+        this.PATH = path;
+        this.status = status;
+        this.currentLevel = LogLevel.getLevel(status);
+        this.minLevel = LogLevel.getLevel(logLevel);
+        this.msg = LogLevel.getMsg(status);
+        this.threadName = threadName;
+        writeLog();
+    }
+
+    public void writeLog() {
         String log = createLogText();
         if (currentLevel >= minLevel) {
             writeFile(log);
@@ -31,7 +45,7 @@ public class Log {
     private String createLogText() {
         return time() + " / "
                 + "log status: " + status + " / "
-                + "thread name: " + Thread.currentThread().getName() + " / "
+                + "thread name: " + threadName + " / "
                 + msg + "\n";
     }
 
@@ -43,7 +57,7 @@ public class Log {
 
     private synchronized void writeFile(String log) {
         try {
-            BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(fileName, true));
+            BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(PATH, true));
             writer.write(log);
             writer.flush();
             writer.close();

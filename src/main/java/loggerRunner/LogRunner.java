@@ -8,27 +8,26 @@ import java.io.IOException;
 
 public class LogRunner {
 
-    private static String logFile = "./src/main/resources/log.txt";
+    private static final String PATH = Paths.LOG_BY_RUNNABLE.getPath();
 
     public static void main(String[] args) {
-        Log.fileName = logFile;
         runThreads();
         readLogFile();
     }
 
     private static void runThreads() {
-        LoggerThread loggerThread_2 = new LoggerThread
-                ("TRACE", LoggerMsg.TRACE_DESCRIPTION.getMsg());
-        loggerThread_2.setName("Трассировщик");
-        loggerThread_2.start();
-        LoggerThread loggerThread_3 = new LoggerThread
-                ("DEBUG", LoggerMsg.DEBUG_DESCRIPTION.getMsg());
-        loggerThread_3.setName("Отладчик");
-        loggerThread_3.start();
-        LoggerThread loggerThread_4 = new LoggerThread
-                ("INFO", LoggerMsg.INFO_DESCRIPTION.getMsg());
-        loggerThread_4.setName("Отчёты");
-        loggerThread_4.start();
+        LoggerRunnable loggerRunnable_2 = new LoggerRunnable
+                (PATH, "TRACE", LoggerMsg.TRACE_DESCRIPTION.getMsg());
+        loggerRunnable_2.setName("Трассировщик");
+        loggerRunnable_2.start();
+        LoggerRunnable loggerRunnable_3 = new LoggerRunnable
+                (PATH, "DEBUG", LoggerMsg.DEBUG_DESCRIPTION.getMsg());
+        loggerRunnable_3.setName("Отладчик");
+        loggerRunnable_3.start();
+        LoggerRunnable loggerRunnable_4 = new LoggerRunnable
+                (PATH, "INFO", LoggerMsg.INFO_DESCRIPTION.getMsg());
+        loggerRunnable_4.setName("Отчёты");
+        loggerRunnable_4.start();
         try {
             Thread.sleep(60_000);
         } catch (InterruptedException e) {
@@ -41,7 +40,7 @@ public class LogRunner {
         System.out.println("\n-------------------------------------------------------------------");
         System.out.println("ЧТЕНИЕ ЛОГ-ФАЙЛА");
         try {
-            ResourcesReader.printConsole(logFile);
+            ResourcesReader.printConsole(PATH);
         } catch (IOException e) {
             System.out.println(LoggerMsg.IO_ERROR.getMsg());
             e.printStackTrace();

@@ -5,11 +5,13 @@ import java.util.concurrent.Callable;
 
 public class LoggerCallable extends Thread implements Callable<Void> {
 
+    private final String PATH;
     private String logLevel;
     private String msg;
-    private final String loggerName;
+    private String loggerName;
 
-    LoggerCallable(String logLevel, String msg, String loggerName) {
+    LoggerCallable(String path, String logLevel, String msg, String loggerName) {
+        this.PATH = path;
         this.logLevel = logLevel;
         this.msg = msg;
         this.loggerName = loggerName;
@@ -53,7 +55,7 @@ public class LoggerCallable extends Thread implements Callable<Void> {
     }
 
     private void createNewLog() {
-        new LoggerFactoryExe().getExeLog(logLevel, loggerName);
+        new LogFactory().getLog(PATH, logLevel, loggerName);
     }
 
 }
