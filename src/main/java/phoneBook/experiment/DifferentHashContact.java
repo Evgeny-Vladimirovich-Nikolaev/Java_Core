@@ -9,7 +9,7 @@ public class DifferentHashContact extends Contact{
                             String typePhone,
                             String operator) {
         super(fio, phoneNumber, typePhone, operator);
-        hash = (int)(phoneNumber - 10_000_000);
+        hash = (int)(phoneNumber - 8_900_000_0000L);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class DifferentHashContact extends Contact{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DifferentHashContact cnt = (DifferentHashContact) o;
-        return Objects.equals(phoneNumber, cnt.phoneNumber);
+        return Objects.equals(getPhoneNumber(), cnt.getPhoneNumber());
     }
 
     @Override

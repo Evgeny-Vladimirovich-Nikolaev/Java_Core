@@ -18,7 +18,7 @@ public class EqualHashContact extends Contact{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EqualHashContact cnt = (EqualHashContact) o;
-        return Objects.equals(phoneNumber, cnt.phoneNumber);
+        return Objects.equals(getPhoneNumber(), cnt.getPhoneNumber());
     }
 
     @Override

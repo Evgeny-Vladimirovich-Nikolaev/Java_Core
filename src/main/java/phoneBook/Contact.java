@@ -5,9 +5,9 @@ public class Contact {
     private final String lastName;
     private final String firstName;
     private final String patronymic;
-    protected final Long phoneNumber;
+    private final Long phoneNumber;
     private final String typePhone;
-    protected String operator;
+    private String operator;
     private List<Contact> callersList;
     private HashSet<Contact> callersSet;
     private Contact[] callersArray;
@@ -67,7 +67,7 @@ public class Contact {
         return callersSet;
     }
 
-    public HashMap getCallersMap() {
+    public HashMap<Contact, Long> getCallersMap() {
         return callersMap;
     }
 
