@@ -2,10 +2,10 @@ import java.util.*;
 
 public class ContactBuilder {
 
-    private static HashMap<Integer, String> operators;
-    private static List<Integer> codes;
+    protected static HashMap<Integer, String> operators;
+    protected static List<Integer> codes;
     private static List<Contact> contactList;
-    private static int number = 7_654_321;
+    protected static int number = 7_654_321;
 
     ContactBuilder(int items) {
         operators = OperatorsList.getOperators();
@@ -18,13 +18,13 @@ public class ContactBuilder {
         return contactList;
     }
 
-    static void addContacts(int item) {
+    void addContacts(int item) {
         for (int i = 0; i < item; i++) {
             contactList.add(create());
         }
     }
 
-    static private Contact create() {
+    protected Contact create() {
         String[] fio = NameCreator.createFIO();
         int code = codes.get(new Random().nextInt(codes.size()));
         long phoneNumber =

@@ -25,16 +25,16 @@ public class LogExecutor {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         List<LoggerCallable> tasks = new ArrayList<>();
 
-        LoggerCallable logger_Callable_1 = new LoggerCallable
+        LoggerCallable loggerCallable_1 = new LoggerCallable
                 (PATH, "TRACE", LoggerMsg.TRACE_DESCRIPTION.getMsg(), "Трассировщик");
-        LoggerCallable logger_Callable_2 = new LoggerCallable
+        LoggerCallable loggerCallable_2 = new LoggerCallable
                 (PATH, "DEBUG", LoggerMsg.DEBUG_DESCRIPTION.getMsg(), "Отладчик");
-        LoggerCallable logger_Callable_3 = new LoggerCallable
+        LoggerCallable loggerCallable_3 = new LoggerCallable
                 (PATH, "INFO", LoggerMsg.INFO_DESCRIPTION.getMsg(), "Отчёты");
 
-        tasks.add(logger_Callable_1);
-        tasks.add(logger_Callable_2);
-        tasks.add(logger_Callable_3);
+        tasks.add(loggerCallable_1);
+        tasks.add(loggerCallable_2);
+        tasks.add(loggerCallable_3);
 
         try {
             executorService.invokeAll(tasks);

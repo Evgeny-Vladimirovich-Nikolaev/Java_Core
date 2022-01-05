@@ -5,9 +5,9 @@ public class Contact {
     private final String lastName;
     private final String firstName;
     private final String patronymic;
-    private final Long phoneNumber;
+    protected final Long phoneNumber;
     private final String typePhone;
-    private String operator;
+    protected String operator;
     private List<Contact> callersList;
     private HashSet<Contact> callersSet;
     private Contact[] callersArray;
