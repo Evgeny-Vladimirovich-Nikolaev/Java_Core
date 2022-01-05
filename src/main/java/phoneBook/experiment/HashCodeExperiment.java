@@ -4,25 +4,29 @@ import java.util.*;
 
 public class HashCodeExperiment {
 
-    private static final int SUBSCRIBERS = 10_000;
-    private static final int CASH_LIMIT = 1000;
-    private static List<Contact> diffHash = new DifferentContactBuilder(SUBSCRIBERS).getContacts();
-    private static List<Contact> equalHash = new EqualContactBuilder(SUBSCRIBERS).getContacts();
-    private static List<Contact> balancedHash = new BalancedContactBuilder(SUBSCRIBERS).getContacts();
+    private static int subscribers;
+    private static int cashLimit;
+    private static List<Contact> diffHash;
+    private static List<Contact> equalHash;
+    private static List<Contact> balancedHash;
     private static HashSet<Contact> contactsSet;
     private static HashMap<Contact, Long> contactsMap;
     private static ArrayList<Contact> cash = new ArrayList<>();
     private static ArrayList<Long> results = new ArrayList<>();
 
+    private HashCodeExperiment() {}
 
-    public static void main(String[] args) {
+    public static void start (int subscr, int limit) {
+        subscribers = subscr;
+        cashLimit = limit;
+        diffHash = new DifferentContactBuilder(subscribers).getContacts();
+        equalHash = new EqualContactBuilder(subscribers).getContacts();
+        balancedHash = new BalancedContactBuilder(subscribers).getContacts();
         check(diffHash);
         check(equalHash);
         check(balancedHash);
         System.out.println(results);
         printReport();
-        System.out.println(cash.get(0));
-
     }
 
     private static void check(List<Contact> list) {
@@ -46,8 +50,8 @@ public class HashCodeExperiment {
     private static void fillCash(List<Contact> list) {
         Random rnd = new Random();
         cash.clear();
-        for(int i = 0; i < CASH_LIMIT; i++) {
-            cash.add(list.get(rnd.nextInt(SUBSCRIBERS)));
+        for(int i = 0; i < cashLimit; i++) {
+            cash.add(list.get(rnd.nextInt(subscribers)));
         }
     }
 
