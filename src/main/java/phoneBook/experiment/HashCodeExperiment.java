@@ -16,7 +16,7 @@ public class HashCodeExperiment {
 
     private HashCodeExperiment() {}
 
-    public static void start (int subscr, int limit) {
+    public static ArrayList<Long> getResults (int subscr, int limit) {
         subscribers = subscr;
         cashLimit = limit;
         diffHash = new DifferentContactBuilder(subscribers).getContacts();
@@ -25,8 +25,8 @@ public class HashCodeExperiment {
         check(diffHash);
         check(equalHash);
         check(balancedHash);
-        System.out.println(results);
         printReport();
+        return results;
     }
 
     private static void check(List<Contact> list) {
