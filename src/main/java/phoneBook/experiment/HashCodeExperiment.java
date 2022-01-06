@@ -11,14 +11,16 @@ public class HashCodeExperiment {
     private static List<Contact> balancedHash;
     private static HashSet<Contact> contactsSet;
     private static HashMap<Contact, Long> contactsMap;
-    private static ArrayList<Contact> cash = new ArrayList<>();
-    private static ArrayList<Long> results = new ArrayList<>();
+    private static ArrayList<Contact> cash;
+    private static ArrayList<Long> results;
 
     private HashCodeExperiment() {}
 
     public static ArrayList<Long> getResults (int subscr, int limit) {
         subscribers = subscr;
         cashLimit = limit;
+        results = new ArrayList<>();
+        cash = new ArrayList<>();
         diffHash = new DifferentContactBuilder(subscribers).getContacts();
         equalHash = new EqualContactBuilder(subscribers).getContacts();
         balancedHash = new BalancedContactBuilder(subscribers).getContacts();
