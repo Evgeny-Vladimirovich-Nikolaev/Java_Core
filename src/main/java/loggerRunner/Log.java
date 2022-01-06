@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Log {
 
 
-    private String PATH;
+    private final String PATH;
     private String status;
     private int currentLevel;
     private int minLevel;
@@ -20,17 +20,11 @@ public class Log {
         this.minLevel = LogLevel.getLevel(logLevel);
         this.msg = LogLevel.getMsg(status);
         this.threadName = Thread.currentThread().getName();
-        writeLog();
     }
 
     public Log(String path, String status, String logLevel, String threadName) {
-        this.PATH = path;
-        this.status = status;
-        this.currentLevel = LogLevel.getLevel(status);
-        this.minLevel = LogLevel.getLevel(logLevel);
-        this.msg = LogLevel.getMsg(status);
+        this(path, status, logLevel);
         this.threadName = threadName;
-        writeLog();
     }
 
     public void writeLog() {

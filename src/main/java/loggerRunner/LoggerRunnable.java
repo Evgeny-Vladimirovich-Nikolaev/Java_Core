@@ -50,6 +50,6 @@ public class LoggerRunnable extends Thread {
     }
 
     private void createNewLog() {
-        new LogFactory().getLog(PATH, logLevel);
+        LogFactory.getLog(PATH, logLevel).writeLog();
     }
 }

@@ -12,6 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/loggerExecutor" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/loggerRunner" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/phoneBook/experiment" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/lineSeparator" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -55,7 +55,7 @@ public class LoggerCallable extends Thread implements Callable<Void> {
     }
 
     private void createNewLog() {
-        new LogFactory().getLog(PATH, logLevel, loggerName);
+        LogFactory.getLog(PATH, logLevel, loggerName).writeLog();
     }
 
 }
