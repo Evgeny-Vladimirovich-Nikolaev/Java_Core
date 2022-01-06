@@ -2,14 +2,11 @@ import java.util.Objects;
 
 public class DifferentHashContact extends Contact{
 
-    private int hash;
-
     public DifferentHashContact(String[] fio,
                             long phoneNumber,
                             String typePhone,
                             String operator) {
         super(fio, phoneNumber, typePhone, operator);
-        hash = (int)(phoneNumber - 8_900_000_0000L);
     }
 
     @Override
@@ -22,13 +19,13 @@ public class DifferentHashContact extends Contact{
 
     @Override
     public int hashCode() {
-        return hash;
+        return (int)(getPhoneNumber() - 8_900_000_0000L);
     }
 
     @Override
     public String toString() {
         return  getFIO() + " "
                 + numberToString() + " "
-                + hash;
+                + hashCode();
     }
 }

@@ -8,7 +8,6 @@ public class HashCodeExperiment {
     private static int cashLimit;
     private static List<Contact> diffHash;
     private static List<Contact> equalHash;
-    private static List<Contact> balancedHash;
     private static HashSet<Contact> contactsSet;
     private static HashMap<Contact, Long> contactsMap;
     private static ArrayList<Contact> cash;
@@ -23,10 +22,8 @@ public class HashCodeExperiment {
         cash = new ArrayList<>();
         diffHash = new DifferentContactBuilder(subscribers).getContacts();
         equalHash = new EqualContactBuilder(subscribers).getContacts();
-        balancedHash = new BalancedContactBuilder(subscribers).getContacts();
         check(diffHash);
         check(equalHash);
-        check(balancedHash);
         printReport();
         return results;
     }
@@ -108,14 +105,13 @@ public class HashCodeExperiment {
     private static void printReport() {
         print("РАЗНЫМ", 0);
         print("РАВНЫМ", 4);
-        print("СБАЛАНСИРОВАННЫМ", 8);
     }
 
     private static void print(String hashType, int ind) {
         StringBuilder sb = new StringBuilder("------------------------------------------------------\n");
         sb.append("ВРЕМЯ ПОИСКА С ");
         sb.append(hashType);
-        sb.append(" ХЭШ-КОДОМ:\nКарта по значению: ");
+        sb.append(" ХЭШКОДОМ:\nКарта по значению: ");
         sb.append(results.get(ind++));
         sb.append("\nСписок: ");
         sb.append(results.get(ind++));

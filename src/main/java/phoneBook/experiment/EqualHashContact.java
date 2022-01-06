@@ -2,15 +2,11 @@ import java.util.Objects;
 
 public class EqualHashContact extends Contact{
 
-    private int hash;
-
     public EqualHashContact(String[] fio,
                             long phoneNumber,
                             String typePhone,
                             String operator) {
         super(fio, phoneNumber, typePhone, operator);
-
-        hash = 31;
     }
 
     @Override
@@ -23,13 +19,13 @@ public class EqualHashContact extends Contact{
 
     @Override
     public int hashCode() {
-        return hash;
+        return 31;
     }
 
     @Override
     public String toString() {
         return  getFIO() + " "
                 + numberToString() + " "
-                + hash;
+                + hashCode();
     }
 }
