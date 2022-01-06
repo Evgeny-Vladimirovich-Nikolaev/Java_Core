@@ -35,18 +35,23 @@ public class HashExperimentRunner {
     }
 
     private static void printReport() {
+        System.out.println("//////////////////////////////////////////////////////");
         print("РАЗНЫМ", 0);
         print("РАВНЫМ", 4);
     }
 
     private static void print(String hashType, int ind) {
-        StringBuilder sb = new StringBuilder("------------------------------------------------------\n");
+
+        StringBuilder sb = new StringBuilder
+                ("------------------------------------------------------\n");
         sb.append("СРЕДНЕЕ ВРЕМЯ ПОИСКА С ");
         sb.append(hashType);
         sb.append(" ХЭШКОДОМ (контактов ");
         sb.append(SUBSCRIBERS);
         sb.append(", запросов ");
         sb.append(REQUESTS);
+        sb.append(", запусков ");
+        sb.append(ITERATIONS);
         sb.append("):\nКарта по значению: ");
         sb.append(avgResults[ind++]);
         sb.append("\nСписок: ");
