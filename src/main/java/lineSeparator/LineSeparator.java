@@ -1,6 +1,6 @@
 import static java.lang.Character.isDigit;
 
-public class LineSeparator implements Runnable{
+public class LineSeparator extends Thread{
 
     private final String sourcePath;
     private final String outPath;
@@ -24,4 +24,5 @@ public class LineSeparator implements Runnable{
                 .forEach(s -> ResourcesWriter.writeFile
                         (outPath + index++ + fileNameExtension, s, false));
     }
+
 }

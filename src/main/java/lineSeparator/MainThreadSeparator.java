@@ -6,8 +6,7 @@ public class MainThreadSeparator {
     private static String postFix = " Н.А. Заболоцкий";
 
     public static void main(String[] args) {
-        Runnable lineSeparator =  new LineSeparator(sourcePath, outPath, fileNameExtension, postFix);
-        lineSeparator.run();
+        new LineSeparator(sourcePath, outPath, fileNameExtension, postFix).start();
     }
 
 }
