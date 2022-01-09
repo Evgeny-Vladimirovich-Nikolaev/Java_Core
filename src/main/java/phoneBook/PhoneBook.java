@@ -10,11 +10,10 @@ public class PhoneBook {
     private static Contact[] contactsArray = contactsListToArray();
     private static Set<Contact> contactsSet = contactsListToSet();
     private static HashMap<Contact, Long> contactsMap = contactsListToMap();
-    private static HashMap<Contact, Integer> callersMap = new HashMap<>();
+    private static HashMap<Contact, Integer> relatedContactsMap = new HashMap<>();
 
     public static void main(String[] args) {
         fillContacts();
-        fillTree();
         countRelatedContactsByLists();
         countRelatedContactsBySets();
         countRelatedContactsByArrays();
@@ -35,7 +34,7 @@ public class PhoneBook {
         return new HashSet<>(contactsList);
     }
 
-    private static HashMap contactsListToMap() {
+    private static HashMap<Contact, Long> contactsListToMap() {
         HashMap<Contact, Long> map = new HashMap<>();
         for(Contact contact : contactsList) {
             map.put(contact, contact.getPhoneNumber());
@@ -57,22 +56,23 @@ public class PhoneBook {
         }
     }
 
-    private static void fillTree() {
+    private static void fillRelatedContactsMap() {
         for (Contact contact : contactsList) {
             Integer integer = 0;
-            callersMap.put(contact, integer);
+            relatedContactsMap.put(contact, integer);
         }
     }
 
     private static void countRelatedContactsByLists() {
         //замеряемый по времени фрагмент кода
         ///////////////////////////////////////////////////////////////////////////////////////////////////
+        fillRelatedContactsMap();
         Instant start = Instant.now();
         for (Contact contact : contactsList) {
             for (Contact relatedContact : contact.getCallersList()) {
-                int count = callersMap.get(relatedContact);
+                int count = relatedContactsMap.get(relatedContact);
                 count++;
-                callersMap.replace(relatedContact, count);
+                relatedContactsMap.replace(relatedContact, count);
             }
         }
         Instant finish = Instant.now();
@@ -86,6 +86,7 @@ public class PhoneBook {
     private static void countRelatedContactsByMaps() {
         //замеряемый по времени фрагмент кода
         ///////////////////////////////////////////////////////////////////////////////////////////////////
+        fillRelatedContactsMap();
         Instant start = Instant.now();
         Iterator<Map.Entry<Contact, Long>> outEntries = contactsMap.entrySet().iterator();
         while (outEntries.hasNext()) {
@@ -94,9 +95,9 @@ public class PhoneBook {
                     = currentContact.getCallersMap().entrySet().iterator();
             while(inEntries.hasNext()) {
                 Contact relatedContact = inEntries.next().getKey();
-                int count = callersMap.get(relatedContact);
+                int count = relatedContactsMap.get(relatedContact);
                 count++;
-                callersMap.replace(relatedContact, count);
+                relatedContactsMap.replace(relatedContact, count);
             }
         }
         Instant finish = Instant.now();
@@ -110,12 +111,13 @@ public class PhoneBook {
     private static void countRelatedContactsBySets() {
         //замеряемый по времени фрагмент кода
         ///////////////////////////////////////////////////////////////////////////////////////////////////
+        fillRelatedContactsMap();
         Instant start = Instant.now();
         for (Contact contact : contactsSet) {
             for (Contact relatedContact : contact.getCallersSet()) {
-                int count = callersMap.get(relatedContact);
+                int count = relatedContactsMap.get(relatedContact);
                 count++;
-                callersMap.replace(relatedContact, count);
+                relatedContactsMap.replace(relatedContact, count);
             }
         }
         Instant finish = Instant.now();
@@ -129,12 +131,13 @@ public class PhoneBook {
     private static void countRelatedContactsByArrays() {
         //замеряемый по времени фрагмент кода
         ///////////////////////////////////////////////////////////////////////////////////////////////////
+        fillRelatedContactsMap();
         Instant start = Instant.now();
         for (Contact contact : contactsArray) {
             for (Contact relatedContact : contact.getCallersArray()) {
-                int count = callersMap.get(relatedContact);
+                int count = relatedContactsMap.get(relatedContact);
                 count++;
-                callersMap.replace(relatedContact, count);
+                relatedContactsMap.replace(relatedContact, count);
             }
         }
         Instant finish = Instant.now();
@@ -148,25 +151,25 @@ public class PhoneBook {
     private static void printContactsMap() {
         System.out.println("ВСЕ НОМЕРА");
         System.out.println("----------------------------------------------------------------------");
-        callersMap.forEach((contact, value) -> {
+        relatedContactsMap.forEach((contact, value) -> {
             System.out.println("----------------------------------------------------------------------");
             System.out.println(contact);
             System.out.println("Количество использования номера другими абонентами для абонента ");
             System.out.print(contact.getFIO() + ":");
-            System.out.println(callersMap.get(contact));
+            System.out.println(relatedContactsMap.get(contact));
         });
     }
 
     private static void findPopularContactsByMap() {
         List<Contact> popularContacts = new ArrayList<>();
-        Iterator<Map.Entry<Contact, Integer>> entries = callersMap.entrySet().iterator();
+        Iterator<Map.Entry<Contact, Integer>> entries = relatedContactsMap.entrySet().iterator();
         int max = 0;
         //замеряемый по времени фрагмент кода
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         Instant start = Instant.now();
         while (entries.hasNext()) {
             Contact currentContact = entries.next().getKey();
-            int temp = callersMap.get(currentContact);
+            int temp = relatedContactsMap.get(currentContact);
             if (temp > max) {
                 max = temp;
                 popularContacts.clear();
@@ -178,7 +181,7 @@ public class PhoneBook {
         Instant finish = Instant.now();
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         long timeByMap = Duration.between(start, finish).toMillis();
-        System.out.println("Время обхода карты: " + timeByMap + " мс");
+        System.out.println("Время обхода карты relatedContactsMap: " + timeByMap + " мс");
         printContactsList(popularContacts);
     }
 
@@ -189,7 +192,7 @@ public class PhoneBook {
             System.out.println(contact);
             System.out.println("Количество использования номера другими абонентами для абонента ");
             System.out.print(contact.getFIO() + ":");
-            System.out.println(callersMap.get(contact));
+            System.out.println(relatedContactsMap.get(contact));
         }
     }
 
