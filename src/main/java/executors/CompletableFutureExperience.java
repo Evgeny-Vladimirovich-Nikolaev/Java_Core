@@ -14,9 +14,9 @@ public class CompletableFutureExperience {
 
     static private void runCompletableFutures() {
         try {
-            CompletableFuture<Long> maximum = CompletableFuture.supplyAsync(CompletableFutureExperience::max, executor);
-            CompletableFuture<Long> minimum = CompletableFuture.supplyAsync(CompletableFutureExperience::min, executor);
-            CompletableFuture<Double> average = CompletableFuture.supplyAsync(CompletableFutureExperience::avg, executor);
+            CompletableFuture.supplyAsync(CompletableFutureExperience::max, executor);
+            CompletableFuture.supplyAsync(CompletableFutureExperience::min, executor);
+            CompletableFuture.supplyAsync(CompletableFutureExperience::avg, executor);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,14 +54,13 @@ public class CompletableFutureExperience {
     }
 
     private static Double avg() {
-        double avg;
-        Long sum = null;
+        double avg = -1.0;
         try {
-            sum = new Addition(longList).call();
+            Long sum = new Addition(longList).call();
+            avg = (double )sum / longList.size();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        avg = sum / longList.size();
         System.out.println(avg);
         return (avg);
     }
