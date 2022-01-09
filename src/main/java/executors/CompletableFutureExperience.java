@@ -14,9 +14,9 @@ public class CompletableFutureExperience {
 
     static private void runCompletableFutures() {
         try {
-            CompletableFuture.supplyAsync(CompletableFutureExperience::max, executor);
-            CompletableFuture.supplyAsync(CompletableFutureExperience::min, executor);
-            CompletableFuture.supplyAsync(CompletableFutureExperience::avg, executor);
+            CompletableFuture.supplyAsync(() -> max(), executor);
+            CompletableFuture.supplyAsync(() -> min(), executor);
+            CompletableFuture.supplyAsync(() -> avg(), executor);
         } catch (Exception e) {
             e.printStackTrace();
         }
