@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.*;
 
 public class CompletableFutureExperience {
 
-    static private ExecutorService executor = Executors.newFixedThreadPool(3);
+    static private ExecutorService executor = Executors.newFixedThreadPool(4);
     static private int limit = 1_000_000;
-    //static private int limit = 100_000_000;
-    static private ArrayList<Long> longList = getLongList();
+    //static private int limit = 70_000_000;
+    static private ArrayList<Integer> integers = getIntegerList();
 
     public static void main(String[] args) {
         runCompletableFutures();
@@ -14,54 +15,66 @@ public class CompletableFutureExperience {
 
     static private void runCompletableFutures() {
         try {
-            CompletableFuture.supplyAsync(() -> max(), executor);
-            CompletableFuture.supplyAsync(() -> min(), executor);
-            CompletableFuture.supplyAsync(() -> avg(), executor);
+            CompletableFuture.supplyAsync(() -> maximum(), executor);
+            CompletableFuture.supplyAsync(() -> minimum(), executor);
+            CompletableFuture.supplyAsync(() -> sum(), executor);
+            CompletableFuture.supplyAsync(() -> average(), executor);
         } catch (Exception e) {
             e.printStackTrace();
         }
         executor.shutdown();
     }
 
-    static ArrayList<Long> getLongList() {
-        ArrayList<Long> list = new ArrayList<>();
-        for (long i = 0; i < limit; i++) {
-            list.add(i);
+    static ArrayList<Integer> getIntegerList() {
+        ArrayList<Integer> list = new ArrayList<>();
+        Random rnd = new Random();
+        for (int i = 0; i < limit; i++) {
+            list.add(rnd.nextInt());
         }
         return list;
     }
 
-    private static Long max() {
-        Long max = null;
+    private static Integer maximum() {
+        Integer max = null;
         try {
-            max = new Maximum(longList).call();
+            max = new Maximum(integers).call();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(max);
+        System.out.println("Максимум в списке равен " + max);
         return max;
     }
 
-    private static Long min() {
-        Long min = null;
+    private static Integer minimum() {
+        Integer min = null;
         try {
-            min = new Minimum(longList).call();
+            min = new Minimum(integers).call();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(min);
+        System.out.println("Минимум в списке равен " + min);
         return min;
     }
 
-    private static Double avg() {
-        double avg = -1.0;
+    private static Long sum() {
+        Long sum = null;
         try {
-            Long sum = new Addition(longList).call();
-            avg = (double )sum / longList.size();
+            sum = new Sum(integers).call();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(avg);
-        return (avg);
+        System.out.println("Сумма значений в списке равна " + sum);
+        return (sum);
+    }
+
+    private static Double average() {
+        Double avg = null;
+        try {
+            avg = new Average(integers).call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Среднее арифметическое значений в списке равно " + avg);
+        return avg;
     }
 }
