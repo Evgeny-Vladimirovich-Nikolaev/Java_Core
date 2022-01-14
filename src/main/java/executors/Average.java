@@ -1,18 +1,19 @@
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-public class Maximum implements Callable<Integer> {
+public class Average implements Callable<Double> {
 
     private ArrayList<Integer> integers;
 
-    Maximum(ArrayList<Integer> integers) {
+    Average(ArrayList<Integer> integers) {
         this.integers = integers;
     }
+
     @Override
-    public Integer call() {
+    public Double call() {
         return integers.stream()
                 .mapToInt(i -> i)
                 .summaryStatistics()
-                .getMax();
+                .getAverage();
     }
 }
