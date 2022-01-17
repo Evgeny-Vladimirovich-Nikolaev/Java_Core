@@ -1,5 +1,10 @@
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
+@Getter
+@Setter
 public class LegalEntityAccount extends Account {
 
     private final String organizationName;
@@ -19,27 +24,4 @@ public class LegalEntityAccount extends Account {
         this.legalAddress = legalAddress;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
-    }
-
-    public String getLegalAddress() {
-        return legalAddress;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEMail() {
-        return eMail;
-    }
-
-    public void setEMail(String eMail) {
-        this.eMail = eMail;
-    }
 }

@@ -1,6 +1,11 @@
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
-public class IndividualAccount extends Account{
+@Getter
+@Setter
+public class IndividualAccount extends Account {
 
     private final String lastName;
     private final String name;
@@ -22,31 +27,4 @@ public class IndividualAccount extends Account{
         this.patronymic = patronymic;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEMail() {
-        return eMail;
-    }
-
-    public void setEMail(String eMail) {
-        this.eMail = eMail;
-    }
 }
