@@ -23,7 +23,8 @@ abstract class Account {
     }
 
     protected void withdraw(BigDecimal money) {
-        if (lock.tryLock()) {
+        if (lock.tryLock()
+                && Double.parseDouble(money.toString()) <= Double.parseDouble(balance.toString())) {
             this.balance = this.balance.subtract(money);
         }
     }

@@ -19,6 +19,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/accountReflection" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/accountReflection/account" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/tasks" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/accountReflection/reflector" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
+@DefaultValue
+@Blocked
+
 class IndividualAccount extends Account {
 
     private final String lastName;
@@ -20,11 +23,16 @@ class IndividualAccount extends Account {
         this.patronymic = patronymic;
     }
 
+
     public IndividualAccount(BigDecimal balance, String lastName, String name, String patronymic) {
         super(balance);
         this.lastName = lastName;
         this.name = name;
         this.patronymic = patronymic;
+    }
+
+    private void printMessage() {
+        System.out.println("This method was called by using reflection");
     }
 
 }
