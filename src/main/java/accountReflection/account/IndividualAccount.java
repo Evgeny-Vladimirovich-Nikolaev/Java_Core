@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class IndividualAccount extends Account {
+class IndividualAccount extends Account {
 
     private final String lastName;
     private final String name;
