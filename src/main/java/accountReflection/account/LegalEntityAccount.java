@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
+@Blocked
+
 public class LegalEntityAccount extends Account {
 
     private final String organizationName;

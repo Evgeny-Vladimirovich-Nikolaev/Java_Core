@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@DefaultValue
 @Blocked
 
 class IndividualAccount extends Account {
@@ -35,4 +34,14 @@ class IndividualAccount extends Account {
         System.out.println("This method was called by using reflection");
     }
 
+    @Override
+    public String toString() {
+        return "IndividualAccount{" +
+                "lastName='" + lastName + '\'' +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", phone='" + phone + '\'' +
+                ", eMail='" + eMail + '\'' +
+                '}';
+    }
 }
