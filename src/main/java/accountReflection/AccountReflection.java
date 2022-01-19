@@ -12,8 +12,7 @@ public class AccountReflection {
         System.out.println(acc.getNumber() + " " + acc.getBalance());
         System.out.println(acc2.getNumber() + " " + acc2.getBalance());
 
-        Reflector reflector = new Reflector();
-        reflector.reflect(acc);
+        new AccountReflector(acc).reflect();
     }
 
 }
