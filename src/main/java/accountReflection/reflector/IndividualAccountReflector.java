@@ -3,6 +3,7 @@ import lombok.RequiredArgsConstructor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 
 public class IndividualAccountReflector {
@@ -60,8 +61,8 @@ public class IndividualAccountReflector {
         for (Field f : declaredFields) {
             f.setAccessible(true);
             try {
-                //System.out.println(f);
-                //System.out.println(f.get(reflectAccount));
+                System.out.println(f);
+                System.out.println(f.get(reflectAccount));
                 f.get(reflectAccount);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -73,8 +74,8 @@ public class IndividualAccountReflector {
         for (Method m : declaredMethods) {
             m.setAccessible(true);
             try {
-                //System.out.println(m);
-                //System.out.println(Arrays.toString(m.getDeclaredAnnotations()));
+                System.out.println(m);
+                System.out.println(Arrays.toString(m.getDeclaredAnnotations()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -87,7 +88,7 @@ public class IndividualAccountReflector {
                 new ProxyHandler(reflectAccount));
         proxyAccount.deposit(new BigDecimal(10000));
         proxyAccount.withdraw(new BigDecimal(10_000));
-        System.out.println(proxyAccount.getBalance());
+        proxyAccount.getBalance();
     }
 
     @RequiredArgsConstructor
@@ -100,15 +101,15 @@ public class IndividualAccountReflector {
             Method declaredMethod = origin.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
             Blocked ann;
             Annotation[] annotations = declaredMethod.getDeclaredAnnotations();
-            for(int i = 0; i < annotations.length; i++) {
-                if(annotations[i].annotationType() == Blocked.class) {
+            for (int i = 0; i < annotations.length; i++) {
+                if (annotations[i].annotationType() == Blocked.class) {
                     ann = (Blocked) annotations[i];
-                    if(ann.access())return declaredMethod.invoke(origin, args);
+                    if (ann.access()) return declaredMethod.invoke(origin, args);
                     break;
                 }
             }
             return null;
-            }
-}
+        }
+    }
 
 }

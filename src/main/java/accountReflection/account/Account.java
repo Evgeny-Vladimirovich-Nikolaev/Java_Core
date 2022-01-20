@@ -25,32 +25,33 @@ abstract class Account implements BalanceProcessing {
     @Override
     @Blocked
     public void withdraw(BigDecimal money) {
-        System.out.println("balance before " + balance);
+        System.out.println("баланс до операции: " + balance + "\n");
         if (lock.tryLock()
                 && Double.parseDouble(money.toString()) <= Double.parseDouble(balance.toString())) {
             this.balance = this.balance.subtract(money);
         }
-        System.out.println("balance after " + balance);
+        System.out.println("баланс после операции: " + balance + "\n");
     }
 
     @Override
     @Blocked
     public void deposit(BigDecimal money) {
-        System.out.println("balance before " + balance);
+        System.out.println("баланс до операции: " + balance + "\n");
         if (lock.tryLock()) {
             this.balance = this.balance.add(money);
         } else {
             lock.unlock();
         }
-        System.out.println("balance after " + balance);
+        System.out.println("баланс после операции: " + balance + "\n");
     }
 
 
     @Override
     @Blocked
     public BigDecimal getBalance() {
+        System.out.printf("Баланс на счете № %s равен: %s ",
+                number,
+                balance);
         return balance;
     }
-
-
 }
