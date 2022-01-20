@@ -12,6 +12,7 @@ public class AccountReflection {
         acc.getBalance();
         acc2.getBalance();
 
+        System.out.println("\nВЫЗОВЫ МЕТОДОВ КЛАССА IndividualAccountReflector");
         new IndividualAccountReflector(acc).reflect();
     }
 

@@ -3,7 +3,11 @@ import lombok.RequiredArgsConstructor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
+import java.rmi.AccessException;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class IndividualAccountReflector {
@@ -26,6 +30,7 @@ public class IndividualAccountReflector {
         readFields();
         readMethods();
         createProxyAccount();
+        tryWithProxy();
     }
 
     private void extractClassMembers() {
@@ -36,6 +41,7 @@ public class IndividualAccountReflector {
     }
 
     private void createReflectAccount() {
+        System.out.println("ВЫЗОВЫ КОНСТРУКТОРОВ");
         for (int i = 0; i < constructors.length; i++) {
             try {
                 reflectAccount = (IndividualAccount) constructors[i].newInstance(new BigDecimal(1_000_000), "Zits", "Predsedatel", "Funt");
@@ -58,12 +64,12 @@ public class IndividualAccountReflector {
     }
 
     private void readFields() {
+        System.out.println("ЧТЕНИЙ ПОЛЕЙ КЛАССА");
         for (Field f : declaredFields) {
             f.setAccessible(true);
             try {
                 System.out.println(f);
                 System.out.println(f.get(reflectAccount));
-                f.get(reflectAccount);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -71,6 +77,7 @@ public class IndividualAccountReflector {
     }
 
     private void readMethods() {
+        System.out.println("ЧТЕНИЕ МЕТОДОВ И АННОТАЦИЙ К МЕТОДАМ");
         for (Method m : declaredMethods) {
             m.setAccessible(true);
             try {
@@ -83,12 +90,29 @@ public class IndividualAccountReflector {
     }
 
     private void createProxyAccount() {
+        System.out.println("СОЗДАНИЕ ПРОКСИ-КЛАССА");
         proxyAccount = (BalanceProcessing) Proxy.newProxyInstance(IndividualAccountReflector.class.getClassLoader(),
                 new Class[]{BalanceProcessing.class},
                 new ProxyHandler(reflectAccount));
-        proxyAccount.deposit(new BigDecimal(10000));
-        proxyAccount.withdraw(new BigDecimal(10_000));
-        proxyAccount.getBalance();
+    }
+
+    private void tryWithProxy() {
+        System.out.println("ВЫЗОВЫ МЕТОДОВ ЧЕРЕЗ ПРОКСИ-КЛАСС");
+        try {
+            proxyAccount.deposit(new BigDecimal(10000));
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        try {
+            proxyAccount.withdraw(new BigDecimal(1000));
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        try {
+            proxyAccount.getBalance();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
     }
 
     @RequiredArgsConstructor
@@ -104,8 +128,11 @@ public class IndividualAccountReflector {
             for (int i = 0; i < annotations.length; i++) {
                 if (annotations[i].annotationType() == Blocked.class) {
                     ann = (Blocked) annotations[i];
-                    if (ann.access()) return declaredMethod.invoke(origin, args);
-                    break;
+                    if (ann.access()) {
+                        return declaredMethod.invoke(origin, args);
+                    } else {
+                        throw new AccessException("Отказано в доступе к операции");
+                    }
                 }
             }
             return null;
