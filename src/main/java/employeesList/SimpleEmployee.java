@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Employee {
+public class SimpleEmployee {
 
     private final int id;
     private String lastName;
@@ -8,7 +8,7 @@ public class Employee {
     private final String patronymic;
     private final LocalDate hireDate;
 
-    public Employee(int id, String lastName, String firstName, String patronymic, LocalDate hireDate) {
+    public SimpleEmployee(int id, String lastName, String firstName, String patronymic, LocalDate hireDate) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;

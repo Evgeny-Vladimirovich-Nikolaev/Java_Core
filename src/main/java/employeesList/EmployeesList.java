@@ -10,8 +10,8 @@ public class EmployeesList {
     private ArrayList<String> firstNames = new ArrayList<>();
     private ArrayList<String> patronymics = new ArrayList<>();
 
-    public ArrayList<Employee> create() {
-        ArrayList<Employee> list = new ArrayList<>(100);
+    public ArrayList<SimpleEmployee> create() {
+        ArrayList<SimpleEmployee> list = new ArrayList<>(100);
         fillArrays();
         for (int i = 0; i < 100; i++) {
             list.add(createRecord());
@@ -25,13 +25,13 @@ public class EmployeesList {
         patronymics = ResourcesReader.readByLines("malePatronymics.txt");
     }
 
-    private Employee createRecord() {
+    private SimpleEmployee createRecord() {
         Random random = new Random();
         String lastName = lastNames.get(random.nextInt(lastNames.size()));
         String firstName = firstNames.get(random.nextInt(firstNames.size()));
         String patronymic = patronymics.get(random.nextInt(patronymics.size()));
         LocalDate hireDate = randomDate();
-        return new Employee(++id, lastName, firstName, patronymic, hireDate);
+        return new SimpleEmployee(++id, lastName, firstName, patronymic, hireDate);
     }
 
     private static LocalDate randomDate() {

@@ -6,35 +6,35 @@ import java.util.ListIterator;
 
 public class EmployeeUtils {
 
-    private ArrayList<Employee> employees;
+    private ArrayList<SimpleEmployee> simpleEmployees;
 
-    EmployeeUtils(ArrayList<Employee> employees) {
-        this.employees = employees;
+    EmployeeUtils(ArrayList<SimpleEmployee> simpleEmployees) {
+        this.simpleEmployees = simpleEmployees;
     }
 
     void printAll() {
-        Iterator<Employee> iterator = employees.iterator();
+        Iterator<SimpleEmployee> iterator = simpleEmployees.iterator();
         System.out.println("\nОБЩИЙ СПИСОК СОТРУДНИКОВ:");
         while (iterator.hasNext()) {
-            Employee employee = iterator.next();
-            printFormatted(employee);
+            SimpleEmployee simpleEmployee = iterator.next();
+            printFormatted(simpleEmployee);
         }
     }
 
     void printWithWorkAge(int workAge) {
-        Iterator<Employee> iterator = employees.iterator();
+        Iterator<SimpleEmployee> iterator = simpleEmployees.iterator();
         System.out.printf("\nCПИСОК СОТРУДНИКОВ СО СТАЖЕМ %s ЛЕТ:\n", workAge);
         while (iterator.hasNext()) {
-            Employee employee = iterator.next();
-            if (countYears(employee) == workAge) {
-                printFormatted(employee);
+            SimpleEmployee simpleEmployee = iterator.next();
+            if (countYears(simpleEmployee) == workAge) {
+                printFormatted(simpleEmployee);
             }
         }
     }
 
     void printWithWorkAge(int workAge, boolean greater) {
         String gr;
-        Iterator<Employee> iterator = employees.iterator();
+        Iterator<SimpleEmployee> iterator = simpleEmployees.iterator();
         if(greater) {
             gr = " БОЛЬШЕ ";
         } else {
@@ -42,16 +42,16 @@ public class EmployeeUtils {
         }
         System.out.printf("\nCПИСОК СОТРУДНИКОВ СО СТАЖЕМ %s%s ЛЕТ:\n", gr, workAge);
         while (iterator.hasNext()) {
-            Employee employee = iterator.next();
-            if (greater && countYears(employee) > workAge
-                || !greater && countYears(employee) < workAge) {
-                printFormatted(employee);
+            SimpleEmployee simpleEmployee = iterator.next();
+            if (greater && countYears(simpleEmployee) > workAge
+                || !greater && countYears(simpleEmployee) < workAge) {
+                printFormatted(simpleEmployee);
             }
         }
     }
 
     void deleteByOddIndex() {
-        ListIterator<Employee> listIterator = employees.listIterator(employees.size());
+        ListIterator<SimpleEmployee> listIterator = simpleEmployees.listIterator(simpleEmployees.size());
         while(listIterator.hasPrevious()) {
             int index = listIterator.previousIndex();
             listIterator.previous();
@@ -61,16 +61,16 @@ public class EmployeeUtils {
         }
     }
 
-    private void printFormatted(Employee employee) {
+    private void printFormatted(SimpleEmployee simpleEmployee) {
         System.out.println(
-            employee
+            simpleEmployee
              + "\nСтаж работы: "
-             + countYears(employee)
+             + countYears(simpleEmployee)
              + " лет");
     }
 
-    private int countYears(Employee employee) {
-        return Period.between(employee.getHireDate(), LocalDate.now()).getYears();
+    private int countYears(SimpleEmployee simpleEmployee) {
+        return Period.between(simpleEmployee.getHireDate(), LocalDate.now()).getYears();
     }
 
 }
