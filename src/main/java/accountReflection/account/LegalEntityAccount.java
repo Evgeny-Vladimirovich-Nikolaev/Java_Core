@@ -24,8 +24,30 @@ public class LegalEntityAccount extends Account {
     }
 
     @Override
+    @Blocked(access = false)
+    public void deposit(BigDecimal money) {
+        super.deposit(money);
+    }
+
+    @Override
+    @Blocked(access = false)
+    public void withdraw(BigDecimal money) {
+        super.deposit(money);
+    }
+
+    @Override
     @Blocked
     public BigDecimal getBalance() {
         return super.getBalance();
+    }
+
+    @Override
+    public String toString() {
+        return "LegalEntityAccount{" +
+                "organizationName='" + organizationName + '\'' +
+                ", legalAddress='" + legalAddress + '\'' +
+                ", phone='" + phone + '\'' +
+                ", eMail='" + eMail + '\'' +
+                '}';
     }
 }
