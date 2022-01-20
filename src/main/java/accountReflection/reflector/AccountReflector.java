@@ -1,3 +1,6 @@
+import lombok.RequiredArgsConstructor;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -10,8 +13,8 @@ public class AccountReflector {
     private Account reflectAccount = null;
     private BalanceChanging proxyAccount;
     private Constructor<?>[] constructors;
-    private Field[] fields;
-    private Method[] methods;
+    private Field[] declaredFields;
+    private Method[] declaredMethods;
 
     AccountReflector(Account account) {
         this.account = account;
@@ -28,8 +31,8 @@ public class AccountReflector {
     private void extractClassMembers() {
         klass = account.getClass();
         constructors = klass.getDeclaredConstructors();
-        fields = klass.getDeclaredFields();
-        methods = klass.getDeclaredMethods();
+        declaredFields = klass.getDeclaredFields();
+        declaredMethods = klass.getDeclaredMethods();
     }
 
     private void createReflectAccount() {
@@ -55,7 +58,7 @@ public class AccountReflector {
     }
 
     private void readFields() {
-        for (Field f : fields) {
+        for (Field f : declaredFields) {
             f.setAccessible(true);
             try {
                 System.out.println(f);
@@ -67,7 +70,7 @@ public class AccountReflector {
     }
 
     private void readMethods() {
-        for (Method m : methods) {
+        for (Method m : declaredMethods) {
             m.setAccessible(true);
             try {
                 System.out.println(m);
@@ -82,6 +85,41 @@ public class AccountReflector {
         proxyAccount = (BalanceChanging) Proxy.newProxyInstance(AccountReflector.class.getClassLoader(),
                 new Class[]{BalanceChanging.class},
                 new ProxyHandler(reflectAccount));
+        proxyAccount.deposit(new BigDecimal(1000));
+        proxyAccount.withdraw(new BigDecimal(10_000));
+    }
+
+    @RequiredArgsConstructor
+    private static class ProxyHandler implements InvocationHandler {
+
+        private final BalanceChanging origin;
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            Object result = null;
+            Method[] methods = origin.getClass().getDeclaredMethods();
+            for(int i = 0; i < methods.length; i++) {
+                Annotation annotation = methods[i].getAnnotation(Blocked.class);
+                System.out.println("annotation = " + annotation );
+            }
+
+
+
+//            Parameter[] parameters = declaredMethod.getParameters();
+//            for (int i = 0; i < parameters.length; i++) {
+//                Parameter parameter = parameters[i];
+//                DefaultValue de = parameter.getAnnotation(DefaultValue.class);
+//                if (args[i] == null) {
+//                    args[i] = Integer.decode(de.value());
+//                }
+//            }
+//            DefaultValue annotation = declaredMethod.getAnnotation(DefaultValue.class);
+//            Object result = declaredMethod.invoke(origin, args);
+//            if (result == null && annotation != null) {
+//                return Double.valueOf(annotation.value());
+//            }
+            return result;
+        }
     }
 
 }

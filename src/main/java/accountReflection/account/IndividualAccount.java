@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@Blocked
+
 
 class IndividualAccount extends Account {
 
@@ -30,6 +30,9 @@ class IndividualAccount extends Account {
         this.patronymic = patronymic;
     }
 
+
+
+    @Blocked
     private void printMessage() {
         System.out.println("This method was called by using reflection");
     }
