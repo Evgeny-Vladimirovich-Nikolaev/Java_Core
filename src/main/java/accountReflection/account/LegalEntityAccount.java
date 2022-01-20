@@ -1,11 +1,9 @@
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 
 @Getter
 @Setter
-
 public class LegalEntityAccount extends Account {
 
     private final String organizationName;
@@ -30,7 +28,4 @@ public class LegalEntityAccount extends Account {
     public BigDecimal getBalance() {
         return super.getBalance();
     }
-
-
-
 }

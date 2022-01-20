@@ -6,8 +6,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface Blocked {
-
     boolean access() default true;
-    Class<?> clazz() default Blocked.class;
-
 }

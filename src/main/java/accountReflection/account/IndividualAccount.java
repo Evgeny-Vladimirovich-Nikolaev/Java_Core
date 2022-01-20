@@ -1,12 +1,9 @@
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 
 @Getter
 @Setter
-
-
 class IndividualAccount extends Account {
 
     private final String lastName;
@@ -21,7 +18,6 @@ class IndividualAccount extends Account {
         this.name = name;
         this.patronymic = patronymic;
     }
-
 
     public IndividualAccount(BigDecimal balance, String lastName, String name, String patronymic) {
         super(balance);
