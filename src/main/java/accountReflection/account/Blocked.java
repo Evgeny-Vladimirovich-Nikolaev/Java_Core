@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 
 public @interface Blocked {
 
-    boolean access() default false;
+    boolean access() default true;
     Class<?> clazz() default Blocked.class;
 
 }

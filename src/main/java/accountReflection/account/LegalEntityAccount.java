@@ -26,4 +26,12 @@ public class LegalEntityAccount extends Account {
         this.legalAddress = legalAddress;
     }
 
+    @Override
+    @Blocked
+    public BigDecimal getBalance() {
+        return super.getBalance();
+    }
+
+
+
 }

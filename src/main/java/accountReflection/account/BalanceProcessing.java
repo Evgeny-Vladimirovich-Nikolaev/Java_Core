@@ -1,9 +1,9 @@
 import java.math.BigDecimal;
 
-public interface BalanceChanging {
+public interface BalanceProcessing {
 
+    BigDecimal getBalance();
     void withdraw(BigDecimal money);
-
     void deposit(BigDecimal money);
 
 }

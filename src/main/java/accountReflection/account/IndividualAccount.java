@@ -30,11 +30,22 @@ class IndividualAccount extends Account {
         this.patronymic = patronymic;
     }
 
+    @Override
+    @Blocked(access = false)
+    public void deposit(BigDecimal money) {
+        super.deposit(money);
+    }
 
+    @Override
+    @Blocked(access = false)
+    public void withdraw(BigDecimal money) {
+        super.deposit(money);
+    }
 
+    @Override
     @Blocked
-    private void printMessage() {
-        System.out.println("This method was called by using reflection");
+    public BigDecimal getBalance() {
+        return super.getBalance();
     }
 
     @Override

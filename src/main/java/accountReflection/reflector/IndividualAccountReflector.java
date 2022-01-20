@@ -3,20 +3,19 @@ import lombok.RequiredArgsConstructor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 
-public class AccountReflector {
+public class IndividualAccountReflector {
 
     private Class<?> klass;
     private Account account;
     private Account reflectAccount = null;
-    private BalanceChanging proxyAccount;
+    private BalanceProcessing proxyAccount;
     private Constructor<?>[] constructors;
     private Field[] declaredFields;
     private Method[] declaredMethods;
 
-    AccountReflector(Account account) {
+    IndividualAccountReflector(Account account) {
         this.account = account;
     }
 
@@ -61,8 +60,9 @@ public class AccountReflector {
         for (Field f : declaredFields) {
             f.setAccessible(true);
             try {
-                System.out.println(f);
-                System.out.println(f.get(reflectAccount));
+                //System.out.println(f);
+                //System.out.println(f.get(reflectAccount));
+                f.get(reflectAccount);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -73,8 +73,8 @@ public class AccountReflector {
         for (Method m : declaredMethods) {
             m.setAccessible(true);
             try {
-                System.out.println(m);
-                System.out.println(Arrays.toString(m.getDeclaredAnnotations()));
+                //System.out.println(m);
+                //System.out.println(Arrays.toString(m.getDeclaredAnnotations()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -82,44 +82,33 @@ public class AccountReflector {
     }
 
     private void createProxyAccount() {
-        proxyAccount = (BalanceChanging) Proxy.newProxyInstance(AccountReflector.class.getClassLoader(),
-                new Class[]{BalanceChanging.class},
+        proxyAccount = (BalanceProcessing) Proxy.newProxyInstance(IndividualAccountReflector.class.getClassLoader(),
+                new Class[]{BalanceProcessing.class},
                 new ProxyHandler(reflectAccount));
-        proxyAccount.deposit(new BigDecimal(1000));
+        proxyAccount.deposit(new BigDecimal(10000));
         proxyAccount.withdraw(new BigDecimal(10_000));
+        System.out.println(proxyAccount.getBalance());
     }
 
     @RequiredArgsConstructor
     private static class ProxyHandler implements InvocationHandler {
 
-        private final BalanceChanging origin;
+        private final BalanceProcessing origin;
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            Object result = null;
-            Method[] methods = origin.getClass().getDeclaredMethods();
-            for(int i = 0; i < methods.length; i++) {
-                Annotation annotation = methods[i].getAnnotation(Blocked.class);
-                System.out.println("annotation = " + annotation );
+            Method declaredMethod = origin.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
+            Blocked ann;
+            Annotation[] annotations = declaredMethod.getDeclaredAnnotations();
+            for(int i = 0; i < annotations.length; i++) {
+                if(annotations[i].annotationType() == Blocked.class) {
+                    ann = (Blocked) annotations[i];
+                    if(ann.access())return declaredMethod.invoke(origin, args);
+                    break;
+                }
             }
-
-
-
-//            Parameter[] parameters = declaredMethod.getParameters();
-//            for (int i = 0; i < parameters.length; i++) {
-//                Parameter parameter = parameters[i];
-//                DefaultValue de = parameter.getAnnotation(DefaultValue.class);
-//                if (args[i] == null) {
-//                    args[i] = Integer.decode(de.value());
-//                }
-//            }
-//            DefaultValue annotation = declaredMethod.getAnnotation(DefaultValue.class);
-//            Object result = declaredMethod.invoke(origin, args);
-//            if (result == null && annotation != null) {
-//                return Double.valueOf(annotation.value());
-//            }
-            return result;
-        }
-    }
+            return null;
+            }
+}
 
 }
