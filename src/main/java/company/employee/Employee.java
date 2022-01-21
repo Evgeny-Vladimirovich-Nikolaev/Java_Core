@@ -1,3 +1,5 @@
+import creator.Department;
+import creator.Post;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
