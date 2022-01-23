@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public enum Branches {
 
+    HEAD_OFFICE(0, "Головной офис", "Москва"),
     OCTOBER_RAILWAY(1, "Октябрьская железная дорога", "Санкт-Петербург"),
     KALININGRAD_RAILWAY(2, "Калининградская железная дорога", "Калининград"),
     MOSCOW_RAILWAY(3, "Московская железная дорога", "Москва"),
