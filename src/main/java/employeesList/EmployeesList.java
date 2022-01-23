@@ -1,9 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
-public class EmployeesList {
+public class EmployeesList{
 
     private static int id = 0;
     private ArrayList<String> lastNames = new ArrayList<>();
@@ -30,16 +29,8 @@ public class EmployeesList {
         String lastName = lastNames.get(random.nextInt(lastNames.size()));
         String firstName = firstNames.get(random.nextInt(firstNames.size()));
         String patronymic = patronymics.get(random.nextInt(patronymics.size()));
-        LocalDate hireDate = randomDate();
+        LocalDate hireDate = RandomDate.getJavaEpochDate();
         return new SimpleEmployee(++id, lastName, firstName, patronymic, hireDate);
     }
 
-    private static LocalDate randomDate() {
-        long startEpochDay = LocalDate.EPOCH.toEpochDay();
-        long endEpochDay = LocalDate.now().toEpochDay();
-        long randomDay = ThreadLocalRandom
-                .current()
-                .nextLong(startEpochDay, endEpochDay);
-        return LocalDate.ofEpochDay(randomDay);
-    }
 }

@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Translit {
+public class Transliterator {
 
     private static final Map<String, String> letters = new HashMap<>();
 
@@ -74,7 +74,9 @@ public class Translit {
         letters.put("я", "ya");
     }
 
-    public static String toTranslit(String text) {
+    private Transliterator() {}
+
+    public static String translit(String text) {
         StringBuilder sb = new StringBuilder(text.length());
         for (int i = 0; i < text.length(); i++) {
             String l = text.substring(i, i + 1);
