@@ -9,9 +9,9 @@ import lombok.*;
 @XmlRootElement
 public class Post {
 
-    @XmlAttribute(name = "position")
+    @XmlAttribute
     private final String position;
-    @XmlAttribute(name = "salary")
+    @XmlAttribute
     private int salary;
 
     public Post(String position, int salary) {

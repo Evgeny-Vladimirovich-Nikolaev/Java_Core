@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDate;
-
 @RequiredArgsConstructor
 @AllArgsConstructor
 @ToString

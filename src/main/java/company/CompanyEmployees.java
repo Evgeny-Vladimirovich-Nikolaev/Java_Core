@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class CompanyEmployees {
 
+    private static final String PATH = "./src/main/resources/employee.xml";
+
     private static ArrayList<Employee> employees = new ArrayList<>(1000);
 
     public static void main(String[] args) throws JAXBException {
@@ -17,8 +19,13 @@ public class CompanyEmployees {
         EmployeeList employeeList = new EmployeeList();
         employeeList.getEmployeeList().addAll(employees);
 
-        XmlUtil.writeInXML(employeeList, Paths.get("./src/main/resources/employee.xml"));
-        writeToXML(employeeList);
+        //XmlUtil.writeInXML(employeeList, Paths.get(PATH));
+        //writeToXML(employeeList);
+
+        EmployeesUtil employeesUtil = new EmployeesUtil(PATH);
+        //employeesUtil.avgSalary();
+        employeesUtil.aboveAverageSalary();
+        employeesUtil.showOverAvgSalary();
     }
 
     private static void writeToXML(EmployeeList employeeList) throws JAXBException {
