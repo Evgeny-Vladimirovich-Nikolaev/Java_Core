@@ -1,5 +1,4 @@
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -23,53 +22,26 @@ public class EmployeesUtil {
         this.path = path;
     }
 
-    public double avgSalary() {
-        System.out.println("ищем среднее");
-        try (InputStream inputStream = EmployeesUtil.class.getResourceAsStream("employee.xml")) {
-            System.out.println("znachenie");
-            Document xmlDocument = getXML(inputStream);
-            XPath xPath = XPathFactory.newInstance().newXPath();
-            String expression = "//post//salary";
-            NodeList valutesNode = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
-            Node valuteNode = (Node) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODE);
-            System.out.println("ID узла: " + valuteNode.getAttributes().getNamedItem("//post//salary").getNodeValue());
-            NodeList childNodes = valuteNode.getChildNodes();
-            System.out.println("количество узлов - " + childNodes.getLength());
-            for (int i = 0; i < childNodes.getLength(); i++) {
-                Node node = childNodes.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE && "salary".equals(node.getNodeName())) {
-                    Element element = (Element) node;
-                    System.out.println("Курс валюты: " + element.getTextContent());
-                }
-            }
-            System.out.println("Содержимое тега Value: " + xPath.compile("//Valute[@ID='R01020A']/Value/text()").evaluate(xmlDocument, XPathConstants.STRING));
-            System.out.println("Среднее значение валют: ");
-            double avg = (Double) xPath.compile("sum(//salary) div count(//salary)").evaluate(xmlDocument, XPathConstants.NUMBER);
-            System.out.println("Среднее значение валют: " + avg);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
     public void aboveAverageSalary() {
         try (InputStream inputStream = new FileInputStream("./src/main/resources/employee.xml")) {
             Document xmlDocument = getXML(inputStream);
             XPath xPath = XPathFactory.newInstance().newXPath();
-            double avg = (double) xPath.compile("sum(//employees_list//employee//post//salary) div count(//employees_list//employee//post//salary)")
+            double avg = (double) xPath
+                    .compile("sum(//post/salary) div count(//employees_list/employee)")
                     .evaluate(xmlDocument, XPathConstants.NUMBER);
-            System.out.println("Среднее значение: " + avg);
-            String expression = "//employees_list//employee//post//salary";
+            System.out.println("СРЕДНЯЯ ЗАРПЛАТА В КОМПАНИИ: " + avg);
+            System.out.println("--------------------------------------------------------");
+            System.out.println("СПИСОК СОТРУДНИКОВ С ЗАРПЛАТОЙ ВЫШЕ СРЕДНЕЙ В КОМПАНИИ:");
+            String expression = "//post/salary";
             NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
             for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = (Node) nodeList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE && avg < Double.valueOf(node.getChildNodes().item(10).getTextContent())) {
-                    Element element = (Element) node;
-                    System.out.println(element.getTextContent());
+                Node node = nodeList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE && avg < Double.valueOf(node.getChildNodes().item(0).getTextContent())) {
+                    System.out.print("--------------------------------------------------------");
+                    System.out.print(node.getParentNode().getParentNode().getTextContent());
                 }
             }
-            System.out.println(avg);
-        } catch (Exception e) {
+        } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
             e.printStackTrace();
         }
     }
@@ -80,8 +52,5 @@ public class EmployeesUtil {
         return builder.parse(inputStream);
     }
 
-    public void showOverAvgSalary() {
-
-    }
 }
 

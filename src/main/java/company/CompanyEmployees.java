@@ -1,8 +1,4 @@
-import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
-
-import java.io.StringWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -19,23 +15,10 @@ public class CompanyEmployees {
         EmployeeList employeeList = new EmployeeList();
         employeeList.getEmployeeList().addAll(employees);
 
-        //XmlUtil.writeInXML(employeeList, Paths.get(PATH));
-        //writeToXML(employeeList);
+        XmlUtil.writeInXML(employeeList, Paths.get(PATH));
 
         EmployeesUtil employeesUtil = new EmployeesUtil(PATH);
-        //employeesUtil.avgSalary();
         employeesUtil.aboveAverageSalary();
-        employeesUtil.showOverAvgSalary();
-    }
-
-    private static void writeToXML(EmployeeList employeeList) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(EmployeeList.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-        StringWriter stringWriter = new StringWriter();
-        marshaller.marshal(employeeList, stringWriter);
-        System.out.println("XML: " + stringWriter);
     }
 
 }
