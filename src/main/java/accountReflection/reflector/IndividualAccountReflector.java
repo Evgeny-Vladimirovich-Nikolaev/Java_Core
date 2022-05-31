@@ -1,3 +1,9 @@
+package accountReflection.reflector;
+
+import accountReflection.account.Account;
+import accountReflection.account.BalanceProcessing;
+import accountReflection.account.Blocked;
+import accountReflection.account.IndividualAccount;
 import lombok.RequiredArgsConstructor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
@@ -15,7 +21,7 @@ public class IndividualAccountReflector {
     private Field[] declaredFields;
     private Method[] declaredMethods;
 
-    IndividualAccountReflector(Account account) {
+    public IndividualAccountReflector(Account account) {
         this.account = account;
     }
 

@@ -1,3 +1,7 @@
+package wordsFrequency;
+
+import utils.ResourcesReader;
+
 public class WordsFrequency {
 
     public static void main(String[] args) {

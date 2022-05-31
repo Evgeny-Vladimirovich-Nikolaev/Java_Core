@@ -1,3 +1,5 @@
+package utils;
+
 import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -5,7 +7,7 @@ public class RandomDate {
 
     private RandomDate() {}
 
-    static LocalDate getJavaEpochDate() {
+    public static LocalDate getJavaEpochDate() {
         long startEpochDay = LocalDate.EPOCH.toEpochDay();
         long endEpochDay = LocalDate.now().toEpochDay();
         long randomDay = ThreadLocalRandom

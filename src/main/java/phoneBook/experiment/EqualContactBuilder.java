@@ -1,6 +1,12 @@
+package phoneBook.experiment;
+
+import phoneBook.Contact;
+import phoneBook.ContactBuilder;
+import utils.NameCreator;
+
 import java.util.Random;
 
-public class EqualContactBuilder extends ContactBuilder{
+public class EqualContactBuilder extends ContactBuilder {
     EqualContactBuilder(int items) {
         super(items);
     }

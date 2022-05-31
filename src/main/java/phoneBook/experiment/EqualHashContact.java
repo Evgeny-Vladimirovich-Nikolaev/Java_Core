@@ -1,6 +1,10 @@
+package phoneBook.experiment;
+
+import phoneBook.Contact;
+
 import java.util.Objects;
 
-public class EqualHashContact extends Contact{
+public class EqualHashContact extends Contact {
 
     public EqualHashContact(String[] fio,
                             long phoneNumber,

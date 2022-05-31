@@ -1,3 +1,5 @@
+package loggerRunner;
+
 public enum Paths {
 
     LOG_BY_CALLABLE("./src/main/resources/executorLog.txt"),

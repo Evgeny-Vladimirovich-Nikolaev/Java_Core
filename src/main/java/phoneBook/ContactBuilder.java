@@ -1,3 +1,8 @@
+package phoneBook;
+
+import utils.NameCreator;
+import utils.ResourcesReader;
+
 import java.util.*;
 
 public class ContactBuilder {
@@ -7,14 +12,14 @@ public class ContactBuilder {
     private static List<Contact> contactList;
     protected static int number = 7_654_321;
 
-    ContactBuilder(int items) {
+    protected ContactBuilder(int items) {
         operators = OperatorsList.getOperators();
         codes = OperatorsList.getCodes();
         contactList = new ArrayList<>();
         addContacts(items);
     }
 
-    List<Contact> getContacts() {
+    public List<Contact> getContacts() {
         return contactList;
     }
 

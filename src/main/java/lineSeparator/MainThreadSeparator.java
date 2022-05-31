@@ -1,3 +1,5 @@
+package lineSeparator;
+
 public class MainThreadSeparator {
 
     private static String sourcePath = "Не позволяй душе лениться.txt";

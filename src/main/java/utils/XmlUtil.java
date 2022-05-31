@@ -1,3 +1,6 @@
+package utils;
+
+import company.employee.EmployeeList;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;

@@ -1,10 +1,12 @@
+package accountReflection.account;
+
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;
 
 @Getter
 @Setter
-class IndividualAccount extends Account {
+public class IndividualAccount extends Account {
 
     private final String lastName;
     private final String name;

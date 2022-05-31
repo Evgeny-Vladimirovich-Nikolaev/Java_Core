@@ -1,3 +1,5 @@
+package loggerRunner;
+
 public enum LogLevel {
 
     ERROR(4, "Ошибка выполнения"),

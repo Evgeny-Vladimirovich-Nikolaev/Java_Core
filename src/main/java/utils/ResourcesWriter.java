@@ -1,3 +1,7 @@
+package utils;
+
+import loggerRunner.LoggerMsg;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 

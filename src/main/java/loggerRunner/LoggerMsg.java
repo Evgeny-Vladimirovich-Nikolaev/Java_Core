@@ -1,3 +1,5 @@
+package loggerRunner;
+
 public enum LoggerMsg {
 
     IO_ERROR("Ошибка ввод/вывода"),
@@ -10,7 +12,7 @@ public enum LoggerMsg {
         this.msg = msg;
     }
 
-    String getMsg() {
+    public String getMsg() {
         return msg;
     }
 }

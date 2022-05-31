@@ -1,3 +1,7 @@
+package loggerRunner;
+
+import utils.ResourcesWriter;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

@@ -1,3 +1,7 @@
+package phoneBook.experiment;
+
+import phoneBook.experiment.HashCodeExperiment;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -9,7 +13,7 @@ public class HashExperimentRunner {
     private static final int REQUESTS = 5_000;
     private static final int ITERATIONS = 10;
 
-    private static double[] avgResults = new double[8];
+    private static final double[] avgResults = new double[8];
 
     public static void main(String[] args) {
         for (int i = 0; i < ITERATIONS; i++) start();
@@ -18,8 +22,7 @@ public class HashExperimentRunner {
     }
 
     private static void start() {
-        List<Long> results = new ArrayList<>();
-        results.addAll(HashCodeExperiment.getResults(SUBSCRIBERS, REQUESTS));
+        List<Long> results = new ArrayList<>(HashCodeExperiment.getResults(SUBSCRIBERS, REQUESTS));
         for (int i = 0; i < 8; i++) {
             if (results.get(i) != 0) avgResults[i] += (double) results.get(i) / 10;
         }

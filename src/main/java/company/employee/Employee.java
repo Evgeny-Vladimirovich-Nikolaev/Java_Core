@@ -1,4 +1,8 @@
+package company.employee;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import company.Department;
+import company.Post;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;

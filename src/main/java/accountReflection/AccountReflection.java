@@ -1,9 +1,17 @@
+package accountReflection;
+
+import accountReflection.account.Account;
+import accountReflection.account.IndividualAccount;
+import accountReflection.account.LegalEntityAccount;
+import accountReflection.reflector.IndividualAccountReflector;
+
 import java.math.BigDecimal;
 
 public class AccountReflection {
 
     public static void main(String[] args) {
         Account acc = new IndividualAccount(new BigDecimal(1_000),"Bender", "Ostap", "Ibrahimovich");
+
         Account acc2 = new LegalEntityAccount(new BigDecimal(1_000_000), "Horns&Hooves", "Chernomorsk");
         acc.getBalance();
         acc2.getBalance();

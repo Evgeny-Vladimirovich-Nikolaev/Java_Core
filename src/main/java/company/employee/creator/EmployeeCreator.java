@@ -1,4 +1,11 @@
-import creator.PositionSalary;
+package company.employee.creator;
+
+import company.Department;
+import company.Post;
+import company.employee.Employee;
+import utils.NameCreator;
+import utils.Transliterator;
+
 import java.util.Random;
 
 public class EmployeeCreator {
@@ -27,11 +34,11 @@ public class EmployeeCreator {
     private static Department getDepartment() {
         if ((id - 1) <= AdministerPositionSalary.values().length) {
             return new Department(
-                    creator.Branches.HEAD_OFFICE.getBranchNumber(),
-                    creator.Branches.HEAD_OFFICE.getBranch(),
-                    creator.Branches.HEAD_OFFICE.getCity());
+                    Branches.HEAD_OFFICE.getBranchNumber(),
+                    Branches.HEAD_OFFICE.getBranch(),
+                    Branches.HEAD_OFFICE.getCity());
         }
-        creator.Branches branch = creator.Branches.values()[new Random().nextInt(creator.Branches.values().length)];
+        Branches branch = Branches.values()[new Random().nextInt(Branches.values().length)];
         return new Department(
                 branch.getBranchNumber(),
                 branch.getBranch(),

@@ -1,3 +1,5 @@
+package company;
+
 import jakarta.xml.bind.annotation.*;
 import lombok.Data;
 import lombok.Getter;

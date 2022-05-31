@@ -1,8 +1,10 @@
+package accountReflection.account;
+
 import java.math.BigDecimal;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-abstract class Account implements BalanceProcessing {
+public abstract class Account implements BalanceProcessing {
 
     private static long accountsCounter = 0;
     private final long number;

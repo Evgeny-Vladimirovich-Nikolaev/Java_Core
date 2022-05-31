@@ -1,3 +1,8 @@
+package lineSeparator;
+
+import utils.ResourcesReader;
+import utils.ResourcesWriter;
+
 import static java.lang.Character.isDigit;
 
 public class LineSeparator extends Thread{

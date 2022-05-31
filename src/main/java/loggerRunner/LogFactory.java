@@ -1,3 +1,5 @@
+package loggerRunner;
+
 import java.util.Random;
 
 public class LogFactory {

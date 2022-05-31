@@ -1,3 +1,9 @@
+package loggerExecutor;
+
+import loggerRunner.LoggerMsg;
+import loggerRunner.Paths;
+import utils.ResourcesReader;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
