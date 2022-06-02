@@ -34,12 +34,6 @@ public class ResourcesReader {
         } catch (IOException | NullPointerException e) {
             System.out.println("Не удалось прочитать файл ресурсов " + fileName);
             lines.add("нет данных");
-        } finally {
-            try {
-                stream.close();
-            } catch (IOException | NullPointerException e) {
-                System.out.println("Ошибка ввода/вывода: не удалось закрыть поток");
-            }
         }
         return lines;
     }
@@ -55,12 +49,6 @@ public class ResourcesReader {
             }
         } catch (IOException | NullPointerException e) {
             System.out.println("Не удалось прочитать файл ресурсов" + fileName);
-        } finally {
-            try {
-                stream.close();
-            } catch (IOException | NullPointerException e) {
-                System.out.println("Ошибка ввода/вывода: не удалось закрыть поток");
-            }
         }
         return sb.toString();
     }
