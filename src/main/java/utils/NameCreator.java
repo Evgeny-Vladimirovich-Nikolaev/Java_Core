@@ -5,12 +5,12 @@ import java.util.Random;
 
 
 public class NameCreator {
-    private static ArrayList<String> femaleLastNames = getNamesList("femaleLastNames.txt");
-    private static ArrayList<String> femaleFirstNames = getNamesList("femaleFirstNames.txt");
-    private static ArrayList<String> femalePatronymics = getNamesList("femalePatronymics.txt");
-    private static ArrayList<String> maleLastNames = getNamesList("maleLastNames.txt");
-    private static ArrayList<String> maleFirstNames = getNamesList("maleFirstNames.txt");
-    private static ArrayList<String> malePatronymics = getNamesList("malePatronymics.txt");
+    private static final ArrayList<String> femaleLastNames = getNamesList("/femaleLastNames.txt");
+    private static final ArrayList<String> femaleFirstNames = getNamesList("/femaleFirstNames.txt");
+    private static final ArrayList<String> femalePatronymics = getNamesList("/femalePatronymics.txt");
+    private static final ArrayList<String> maleLastNames = getNamesList("/maleLastNames.txt");
+    private static final ArrayList<String> maleFirstNames = getNamesList("/maleFirstNames.txt");
+    private static final ArrayList<String> malePatronymics = getNamesList("/malePatronymics.txt");
 
     public static String[] createFIO() {
         if(new Random().nextBoolean()) {

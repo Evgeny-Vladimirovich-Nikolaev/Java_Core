@@ -44,15 +44,15 @@ public class ContactBuilder {
 
 class OperatorsList {
 
-    private static String[][] files = new String[][]{
-            {"beeline.txt", "Билайн"},
-            {"megaFon.txt", "Мегафон"},
-            {"mts.txt", "МТС"},
-            {"rosTeleCom.txt", "Ростелеком"},
-            {"tele2.txt", "Tele2"}
+    private static final String[][] files = new String[][]{
+            {"/beeline.txt", "Билайн"},
+            {"/megaFon.txt", "Мегафон"},
+            {"/mts.txt", "МТС"},
+            {"/rosTeleCom.txt", "Ростелеком"},
+            {"/tele2.txt", "Tele2"}
     };
-    private static ArrayList<Integer> codes = new ArrayList<>();
-    private static HashMap<Integer,  String> operators = new HashMap<>();
+    private static final ArrayList<Integer> codes = new ArrayList<>();
+    private static final HashMap<Integer,  String> operators = new HashMap<>();
 
     static {
         fillCollections();

@@ -1,4 +1,4 @@
-package phoneBook.experiment;
+package phoneBook;
 
 import phoneBook.experiment.HashCodeExperiment;
 

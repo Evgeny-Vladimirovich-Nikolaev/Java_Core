@@ -24,9 +24,9 @@ public class EmployeesList{
     }
 
     private void fillArrays() {
-        lastNames = ResourcesReader.readByLines("maleLastNames.txt");
-        firstNames = ResourcesReader.readByLines("maleFirstNames.txt");
-        patronymics = ResourcesReader.readByLines("malePatronymics.txt");
+        lastNames = ResourcesReader.readByLines("/maleLastNames.txt");
+        firstNames = ResourcesReader.readByLines("/maleFirstNames.txt");
+        patronymics = ResourcesReader.readByLines("/malePatronymics.txt");
     }
 
     private SimpleEmployee createRecord() {

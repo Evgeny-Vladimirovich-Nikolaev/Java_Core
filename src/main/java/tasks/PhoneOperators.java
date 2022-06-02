@@ -10,15 +10,15 @@ public class PhoneOperators {
     private static ArrayList<String> lines;
     private static int distance;
     private static int city;
-    private static int[][] operator1 = new int[8][2];
-    private static int[][] operator2 = new int[8][2];
-    private static ArrayList<Double> counter1 = new ArrayList<>();
-    private static ArrayList<Double> counter2 = new ArrayList<>();
+    private static final int[][] operator1 = new int[8][2];
+    private static final int[][] operator2 = new int[8][2];
+    private static final ArrayList<Double> counter1 = new ArrayList<>();
+    private static final ArrayList<Double> counter2 = new ArrayList<>();
     private static int result;
     private static int prestige;
 
     public static void main(String[] args) {
-        lines = ResourcesReader.readByLines("input.txt");
+        lines = ResourcesReader.readByLines("/input.txt");
         parseLines(lines);
         fillCounter(operator1, counter1);
         fillCounter(operator2, counter2);

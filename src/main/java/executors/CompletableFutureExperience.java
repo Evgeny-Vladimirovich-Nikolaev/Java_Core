@@ -6,10 +6,9 @@ import java.util.concurrent.*;
 
 public class CompletableFutureExperience {
 
-    static private ExecutorService executor = Executors.newFixedThreadPool(4);
-    static private int limit = 1_000_000;
-    //static private int limit = 70_000_000;
-    static private ArrayList<Integer> integers = getIntegerList();
+    static private final ExecutorService executor = Executors.newFixedThreadPool(4);
+    static private final int LIMIT = 1_000_000;
+    static private final ArrayList<Integer> integers = getIntegerList();
 
     public static void main(String[] args) {
         runCompletableFutures();
@@ -30,7 +29,7 @@ public class CompletableFutureExperience {
     static ArrayList<Integer> getIntegerList() {
         ArrayList<Integer> list = new ArrayList<>();
         Random rnd = new Random();
-        for (int i = 0; i < limit; i++) {
+        for (int i = 0; i < LIMIT; i++) {
             list.add(rnd.nextInt());
         }
         return list;
